@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - Ground
+  - Platform
+  - Item
+  - WaterObstacle
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 1780325787
+    locked: 0
+  - name: Building
+    uniqueID: 1976137535
+    locked: 0
+  - name: Kanopi
+    uniqueID: 4229768369
+    locked: 0
+  - name: Player
+    uniqueID: 4016835455
+    locked: 0
+  - name: Obstacle
+    uniqueID: 543102727
+    locked: 0
+  - name: Roof
+    uniqueID: 3510713261
+    locked: 0
+  m_RenderingLayers:
+  - Default
