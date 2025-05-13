@@ -8,11 +8,17 @@ public class PlayerController2D : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
     private SpriteRenderer spriteRenderer;
+    private bool isBlinking = false;
+    public int maxHealth = 100;
+    public int currentHealth;
+    public HealthBar healthBar;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>(); // Ambil komponen SpriteRenderer
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     void Update()
@@ -43,25 +49,35 @@ public class PlayerController2D : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
-        else if (other.gameObject.CompareTag("WaterObstacle")) // Jika terkena obstacle air
+        else if ((other.gameObject.CompareTag("WaterObstacle") || other.gameObject.CompareTag("Police")) && !isBlinking)
         {
-            StartCoroutine(BlinkEffect()); // Panggil coroutine untuk efek kedap-kedip
+            StartCoroutine(BlinkEffect());
+            TakeDamage(20);
         }
+    }
+
+    void TakeDamage(int damage) {
+        currentHealth -= damage;
+
+        healthBar.SetHealth(currentHealth);
     }
 
     private IEnumerator BlinkEffect()
     {
-        Color originalColor = spriteRenderer.color; // Simpan warna asli
-        float blinkDuration = 1f; // Durasi kedap-kedip
-        float blinkInterval = 0.1f; // Interval kedap-kedip
-        int blinkCount = (int)(blinkDuration / blinkInterval); // Hitung jumlah kedap-kedip
+        isBlinking = true;
+        Color originalColor = spriteRenderer.color;
+        float blinkDuration = 0.3f;
+        float blinkInterval = 0.1f;
+        int blinkCount = (int)(blinkDuration / blinkInterval);
 
         for (int i = 0; i < blinkCount; i++)
         {
-            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f); // Transparan
+            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
             yield return new WaitForSeconds(blinkInterval);
-            spriteRenderer.color = originalColor; // Kembali ke warna asli
+            spriteRenderer.color = originalColor;
             yield return new WaitForSeconds(blinkInterval);
         }
+
+        isBlinking = false;
     }
 }
