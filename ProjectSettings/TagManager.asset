@@ -8,6 +8,8 @@ TagManager:
   - Platform
   - Item
   - WaterObstacle
+  - Balik
+  - Police
   layers:
   - Default
   - TransparentFX
