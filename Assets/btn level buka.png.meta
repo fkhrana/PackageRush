@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      btn level buka_0: 4388563352630941649
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

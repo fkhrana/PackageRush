@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      btn level gembok_0: -6092695431405664605
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

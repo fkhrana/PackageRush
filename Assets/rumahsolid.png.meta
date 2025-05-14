@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      rumahsolid_0: 4976225688195720056
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

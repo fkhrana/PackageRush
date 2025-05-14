@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      pintu tutup_0: 3198495480059025615
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

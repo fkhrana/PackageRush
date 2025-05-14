@@ -30,7 +30,7 @@ public class enemyPatrol : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Balik")){
-            berbalik = !berbalik;
+            berbalik = !berbalik; // what?
         }
     }
 }

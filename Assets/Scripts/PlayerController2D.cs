@@ -3,15 +3,22 @@ using UnityEngine;
 
 public class PlayerController2D : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float jumpForce = 5f;
-    private Rigidbody2D rb;
-    private bool isGrounded;
-    private SpriteRenderer spriteRenderer;
-    private bool isBlinking = false;
-    public int maxHealth = 100;
-    public int currentHealth;
+    // bro organize this
+
+    // dependency
+    public Rigidbody2D rb;
+    public SpriteRenderer spriteRenderer;
     public HealthBar healthBar;
+
+    // settings
+    public float jumpForce = 5f;
+    public float moveSpeed = 5f;
+    public int maxHealth = 100;
+    
+    // internal state
+    private int currentHealth;
+    private bool isGrounded;
+    private bool isBlinking = false;
 
     void Start()
     {
