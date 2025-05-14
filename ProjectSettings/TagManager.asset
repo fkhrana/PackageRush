@@ -10,6 +10,7 @@ TagManager:
   - WaterObstacle
   - Balik
   - Police
+  - Dog
   layers:
   - Default
   - TransparentFX
@@ -64,6 +65,9 @@ TagManager:
     locked: 0
   - name: Roof
     uniqueID: 3510713261
+    locked: 0
+  - name: Item
+    uniqueID: 327813663
     locked: 0
   m_RenderingLayers:
   - Default

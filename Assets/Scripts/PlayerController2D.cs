@@ -49,7 +49,7 @@ public class PlayerController2D : MonoBehaviour
         {
             Destroy(other.gameObject);
         }
-        else if ((other.gameObject.CompareTag("WaterObstacle") || other.gameObject.CompareTag("Police")) && !isBlinking)
+        else if ((other.gameObject.CompareTag("WaterObstacle") || other.gameObject.CompareTag("Police") || other.gameObject.CompareTag("Dog")) && !isBlinking)
         {
             StartCoroutine(BlinkEffect());
             TakeDamage(20);
