@@ -11,6 +11,7 @@ TagManager:
   - Balik
   - Police
   - Dog
+  - Collectible
   layers:
   - Default
   - TransparentFX
