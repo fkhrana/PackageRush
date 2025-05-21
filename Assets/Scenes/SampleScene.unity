@@ -445,7 +445,7 @@ MonoBehaviour:
   - {fileID: 331056457}
   moveSpeed: 3.5
   patrolDestination: 0
-  playerTransform: {fileID: 1174549721}
+  playerTransform: {fileID: 0}
   isChasing: 0
   chaseDistance: 5
 --- !u!70 &58968407
@@ -1743,7 +1743,7 @@ Transform:
   m_GameObject: {fileID: 489533181}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 76.05174, y: -3.76, z: 0}
+  m_LocalPosition: {x: 62.58, y: -3.76, z: 0}
   m_LocalScale: {x: 0.52508, y: 0.52508, z: 0.52508}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4265,7 +4265,7 @@ Transform:
   m_GameObject: {fileID: 1174549717}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.56, y: -2.24, z: 0}
+  m_LocalPosition: {x: 22.6, y: -2.13, z: 0}
   m_LocalScale: {x: 3.5046957, y: 3.5046957, z: 3.5046957}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5491,7 +5491,7 @@ Transform:
   m_GameObject: {fileID: 1414834124}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 85.23, y: -3.63, z: 0}
+  m_LocalPosition: {x: 71.75826, y: -3.63, z: 0}
   m_LocalScale: {x: 1.6420238, y: 2.5850923, z: 1.1203}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6030,7 +6030,7 @@ Transform:
   m_GameObject: {fileID: 1527045727}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 78.73, y: -3.76, z: 0}
+  m_LocalPosition: {x: 65.25826, y: -3.76, z: 0}
   m_LocalScale: {x: 0.52508, y: 0.52508, z: 0.52508}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7833,7 +7833,7 @@ Transform:
   m_GameObject: {fileID: 1707122673}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 81.7, y: -3.76, z: 0}
+  m_LocalPosition: {x: 68.22826, y: -3.76, z: 0}
   m_LocalScale: {x: 0.52508, y: 0.52508, z: 0.52508}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -13,6 +13,10 @@ public class DogPatrol : MonoBehaviour
     public float chaseDistance;
 
     private bool isGrounded;
+    void Start()
+    {
+        playerTransform = FindFirstObjectByType<PlayerController2D>().gameObject.transform;
+    }
 
     void Update()
     {
