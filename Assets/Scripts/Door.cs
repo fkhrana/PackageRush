@@ -10,8 +10,8 @@ public class Door : MonoBehaviour
         {
             // Pemain masuk pintu, game selesai
             Debug.Log("Game Selesai!");
-            // Opsional: Pindah ke scene lain atau tampilkan UI kemenangan
-            SceneManager.LoadScene("GameWin"); // Ganti dengan nama scene yang sesuai
+            // Pindah scene
+            SceneManager.LoadScene("GameWin"); 
         }
     }
 }

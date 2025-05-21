@@ -6,9 +6,9 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance; // Singleton
-    public int itemsCollected = 0; // Menghitung item yang dikumpulkan
-    public int requiredItems = 3; // Jumlah item yang dibutuhkan
-    public GameObject door; // Referensi ke pintu
+    public int itemsCollected = 0;
+    public int requiredItems = 3;
+    public GameObject door;
 
     private void Awake()
     {
