@@ -1,11 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance; // Singleton
+    public static GameManager instance;
     public int itemsCollected = 0;
     public int requiredItems = 3;
     public GameObject door;
@@ -23,13 +21,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "SampleScene")
+        {
+            door = GameObject.FindWithTag("Door");
+            itemsCollected = 0;
+            if (door != null)
+            {
+                door.GetComponent<Collider2D>().isTrigger = false;
+            }
+        }
+    }
+
     public void CollectItem()
     {
         itemsCollected++;
         Debug.Log("Items collected: " + itemsCollected);
 
-        // Cek apakah semua item sudah dikumpulkan
-        if (itemsCollected >= requiredItems)
+        if (itemsCollected >= requiredItems && door != null)
         {
             UnlockDoor();
         }
@@ -37,9 +57,6 @@ public class GameManager : MonoBehaviour
 
     private void UnlockDoor()
     {
-        // Misalnya, nonaktifkan collider pintu atau ubah sprite pintu
-        door.GetComponent<Collider2D>().isTrigger = true; // Aktifkan trigger pintu
-        // Opsional: Ubah sprite pintu untuk menunjukkan pintu terbuka
-        // door.GetComponent<SpriteRenderer>().sprite = openDoorSprite;
+        door.GetComponent<Collider2D>().isTrigger = true;
     }
 }

@@ -12,6 +12,7 @@ TagManager:
   - Police
   - Dog
   - Collectible
+  - Door
   layers:
   - Default
   - TransparentFX

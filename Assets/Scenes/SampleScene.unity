@@ -3550,7 +3550,7 @@ Transform:
   m_GameObject: {fileID: 990239553}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.15, y: -0.57, z: -0.5546728}
+  m_LocalPosition: {x: 4.01, y: 0.76, z: -0.5546728}
   m_LocalScale: {x: 0.4022163, y: 0.4022163, z: 0.4022163}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4245,7 +4245,7 @@ Transform:
   m_GameObject: {fileID: 1174549717}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.51, y: -1.68, z: 0}
+  m_LocalPosition: {x: 22.62, y: -2.26, z: 0}
   m_LocalScale: {x: 3.5046957, y: 3.5046957, z: 3.5046957}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5190,7 +5190,7 @@ GameObject:
   - component: {fileID: 1414834125}
   m_Layer: 0
   m_Name: Door
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
