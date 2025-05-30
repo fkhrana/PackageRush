@@ -8,6 +8,7 @@ public class PlayAgainButton : MonoBehaviour
         if (GameManager.instance != null)
         {
             GameManager.instance.itemsCollected = 0;
+            GameManager.instance.score = 0; // Reset score di GameManager
             GameManager.instance.door = null;
             GameManager.instance.isGameFinished = false;
             Debug.Log("GameManager reset for Play Again");

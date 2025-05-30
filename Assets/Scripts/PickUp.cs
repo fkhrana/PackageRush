@@ -11,7 +11,7 @@ public class PickUp : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isCollected = true;
-            Score score = FindFirstObjectByType<Score>(); // Ganti ke FindFirstObjectByType
+            Score score = FindFirstObjectByType<Score>();
             if (score != null)
             {
                 score.AddScore(scoreValue);
@@ -20,6 +20,16 @@ public class PickUp : MonoBehaviour
             {
                 Debug.LogError("Score component not found in scene! Ensure a GameObject with Score.cs exists.");
             }
+
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.AddScore(scoreValue); // Simpan score di GameManager
+            }
+            else
+            {
+                Debug.LogError("GameManager instance not found!");
+            }
+
             Destroy(gameObject);
         }
     }

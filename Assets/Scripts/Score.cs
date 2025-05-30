@@ -8,7 +8,7 @@ public class Score : MonoBehaviour
 
     private void Start()
     {
-        ResetScore(); // Reset score saat scene dimuat
+        ResetScore();
     }
 
     private void Update()

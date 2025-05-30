@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public int itemsCollected = 0; // Untuk item pintu (Collectible)
     public int requiredItems = 3;
+    public int score = 0; // Untuk menyimpan score
     public GameObject door;
     public bool isGameFinished = false;
 
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Resetting GameManager for SampleScene");
             itemsCollected = 0;
+            score = 0; // Reset score
             isGameFinished = false;
             door = GameObject.FindWithTag("Door");
             if (door != null)
@@ -51,11 +53,11 @@ public class GameManager : MonoBehaviour
                 Debug.LogError("Door not found! Ensure the door has the 'Door' tag.");
             }
 
-            Score score = FindFirstObjectByType<Score>();
-            if (score != null)
+            Score scoreComponent = FindFirstObjectByType<Score>();
+            if (scoreComponent != null)
             {
-                score.ResetScore();
-                Debug.Log("Score reset");
+                scoreComponent.ResetScore();
+                Debug.Log("Score component reset");
             }
             else
             {
@@ -76,9 +78,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void AddScore(int points) // Dipanggil oleh PickUp.cs
+    {
+        if (isGameFinished) return;
+        score += points;
+        Debug.Log($"Score updated: {score}");
+    }
+
     private void UnlockDoor()
     {
         door.GetComponent<Collider2D>().isTrigger = true;
-        Debug.Log("Door unlocked"); // Tidak set isGameFinished di sini
+        Debug.Log("Door unlocked");
     }
 }
