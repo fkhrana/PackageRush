@@ -7,7 +7,7 @@ public class HealthBar : MonoBehaviour
     public Slider slider;
     public Gradient gradient;
     public Image fill;
-    private bool isGameOver = false; // Cegah transisi berulang
+    private bool isGameOver = false;
 
     public void SetMaxHealth(int health)
     {
@@ -18,7 +18,7 @@ public class HealthBar : MonoBehaviour
 
     public void SetHealth(int health)
     {
-        if (isGameOver) return; // Cegah perubahan health setelah game over
+        if (isGameOver) return;
         slider.value = health;
         fill.color = gradient.Evaluate(slider.normalizedValue);
 
@@ -27,7 +27,7 @@ public class HealthBar : MonoBehaviour
             isGameOver = true;
             if (GameManager.instance != null)
             {
-                GameManager.instance.isGameFinished = true; // Tandai game selesai di GameManager
+                GameManager.instance.isGameFinished = true;
             }
             Debug.Log("Game Over: Health depleted!");
             SceneManager.LoadScene("GameOver");

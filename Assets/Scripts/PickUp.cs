@@ -23,7 +23,7 @@ public class PickUp : MonoBehaviour
 
             if (GameManager.instance != null)
             {
-                GameManager.instance.AddScore(scoreValue); // Simpan score di GameManager
+                GameManager.instance.AddScore(scoreValue);
             }
             else
             {

@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public int itemsCollected = 0; // Untuk item pintu (Collectible)
+    public int itemsCollected = 0;
     public int requiredItems = 3;
-    public int score = 0; // Untuk menyimpan score
+    public int score = 0;
     public GameObject door;
     public bool isGameFinished = false;
 
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Resetting GameManager for SampleScene");
             itemsCollected = 0;
-            score = 0; // Reset score
+            score = 0;
             isGameFinished = false;
             door = GameObject.FindWithTag("Door");
             if (door != null)

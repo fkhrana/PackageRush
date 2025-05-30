@@ -34,7 +34,6 @@ public class PlayerController2D : MonoBehaviour
     {
         if (GameManager.instance != null && GameManager.instance.isGameFinished) 
         {
-            // Hentikan gerakan saat game selesai
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
             return;
         }
