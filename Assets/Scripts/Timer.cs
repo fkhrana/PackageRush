@@ -1,29 +1,44 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using TMPro;
-
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI timerText;
-    [SerializeField] float remainingTime;
+    [Header("Dependencies")]
+    [SerializeField] private TextMeshProUGUI timerText;
+    [Header("Settings")]
+    [SerializeField] private float remainingTime = 60f;
+    private bool isGameOver = false;
 
-    void Update()
+    private void Start()
     {
+        timerText.color = Color.white;
+        isGameOver = false;
+    }
+
+    private void Update()
+    {
+        if (isGameOver || (GameManager.instance != null && GameManager.instance.isGameFinished)) return;
+
         if (remainingTime > 0)
         {
             remainingTime -= Time.deltaTime;
         }
-        else if (remainingTime < 0)
+        else if (remainingTime <= 0)
         {
             remainingTime = 0;
-
             timerText.color = Color.red;
+            isGameOver = true;
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.isGameFinished = true;
+            }
+            Debug.Log("Game Over: Time's up!");
+            SceneManager.LoadScene("GameOver");
         }
 
         int minutes = Mathf.FloorToInt(remainingTime / 60);
         int seconds = Mathf.FloorToInt(remainingTime % 60);
-        timerText.text=string.Format("{0:00}:{1:00}", minutes, seconds);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }

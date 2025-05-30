@@ -1,26 +1,28 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController2D : MonoBehaviour
 {
-    // bro organize this
+    // Dependencies
+    [Header("Dependencies")]
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private HealthBar healthBar;
 
-    // dependency
-    public Rigidbody2D rb;
-    public SpriteRenderer spriteRenderer;
-    public HealthBar healthBar;
+    // Settings
+    [Header("Settings")]
+    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private int maxHealth = 100;
 
-    // settings
-    public float jumpForce = 5f;
-    public float moveSpeed = 5f;
-    public int maxHealth = 100;
-    
-    // internal state
+    // Internal State
+    [Header("State")]
     private int currentHealth;
     private bool isGrounded;
     private bool isBlinking = false;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -28,13 +30,20 @@ public class PlayerController2D : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
     }
 
-    void Update()
+    private void Update()
     {
-        // Gerakan
-        float moveX = Input.GetAxis("Horizontal");
+        if (GameManager.instance != null && GameManager.instance.isGameFinished) 
+        {
+            // Hentikan gerakan saat game selesai
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            return;
+        }
+
+        // Horizontal movement
+        float moveX = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
 
-        // Lompat
+        // Jump
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -42,7 +51,7 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Platform"))
         {
@@ -50,23 +59,42 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Item"))
+        if (GameManager.instance != null && GameManager.instance.isGameFinished) return;
+
+        if (other.CompareTag("Item")) // Item untuk score, ditangani oleh PickUp.cs
         {
+            Debug.Log("Player touched score item: " + other.gameObject.name);
             Destroy(other.gameObject);
         }
-        else if ((other.gameObject.CompareTag("WaterObstacle") || other.gameObject.CompareTag("Police") || other.gameObject.CompareTag("Dog")) && !isBlinking)
+        else if (other.CompareTag("Collectible")) // Item untuk pintu, ditangani oleh CollectibleItem.cs
+        {
+            Debug.Log("Player touched collectible item: " + other.gameObject.name);
+        }
+        else if ((other.CompareTag("WaterObstacle") || other.CompareTag("Police") || other.CompareTag("Dog")) && !isBlinking)
         {
             StartCoroutine(BlinkEffect());
             TakeDamage(20);
         }
     }
 
-    void TakeDamage(int damage) {
-        currentHealth -= damage;
+    private void TakeDamage(int damage)
+    {
+        if (GameManager.instance != null && GameManager.instance.isGameFinished) return;
 
+        currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            if (GameManager.instance != null)
+            {
+                GameManager.instance.isGameFinished = true;
+            }
+            Debug.Log("Game Over: Health depleted!");
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     private IEnumerator BlinkEffect()

@@ -1,27 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class Score : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField] private TextMeshProUGUI scoreText;
     private int score = 0;
-    public TextMeshProUGUI scoreText;
 
+    private void Start()
+    {
+        ResetScore(); // Reset score saat scene dimuat
+    }
 
-    void Update()
+    private void Update()
     {
         SetScoreToTMP();
     }
 
     public void AddScore(int value)
     {
+        if (GameManager.instance != null && GameManager.instance.isGameFinished) return;
         score += value;
+        Debug.Log("Score: " + score);
     }
 
-    public void SetScoreToTMP()
+    public void ResetScore()
     {
-        scoreText.text = score.ToString();
+        score = 0;
+        SetScoreToTMP();
+    }
+
+    private void SetScoreToTMP()
+    {
+        if (scoreText != null)
+        {
+            scoreText.text = score.ToString();
+        }
     }
 }

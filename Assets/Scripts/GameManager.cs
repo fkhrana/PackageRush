@@ -4,9 +4,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public int itemsCollected = 0;
+    public int itemsCollected = 0; // Untuk item pintu (Collectible)
     public int requiredItems = 3;
     public GameObject door;
+    public bool isGameFinished = false;
 
     private void Awake()
     {
@@ -33,21 +34,41 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log("Scene loaded: " + scene.name);
         if (scene.name == "SampleScene")
         {
-            door = GameObject.FindWithTag("Door");
+            Debug.Log("Resetting GameManager for SampleScene");
             itemsCollected = 0;
+            isGameFinished = false;
+            door = GameObject.FindWithTag("Door");
             if (door != null)
             {
                 door.GetComponent<Collider2D>().isTrigger = false;
+                Debug.Log("Door found and reset");
+            }
+            else
+            {
+                Debug.LogError("Door not found! Ensure the door has the 'Door' tag.");
+            }
+
+            Score score = FindFirstObjectByType<Score>();
+            if (score != null)
+            {
+                score.ResetScore();
+                Debug.Log("Score reset");
+            }
+            else
+            {
+                Debug.LogWarning("Score component not found in scene!");
             }
         }
     }
 
     public void CollectItem()
     {
+        if (isGameFinished) return;
         itemsCollected++;
-        Debug.Log("Items collected: " + itemsCollected);
+        Debug.Log($"Item collected, total: {itemsCollected}/{requiredItems}");
 
         if (itemsCollected >= requiredItems && door != null)
         {
@@ -58,5 +79,6 @@ public class GameManager : MonoBehaviour
     private void UnlockDoor()
     {
         door.GetComponent<Collider2D>().isTrigger = true;
+        Debug.Log("Door unlocked"); // Tidak set isGameFinished di sini
     }
 }
