@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 2035fb4c18198b64e95021195505dfa1
+guid: 967ebea0b2b22814c9ab4a528ac9ae95
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6973125113031860826
-    second: kanopi_0
+      213: -4218750589861745397
+    second: animasi nara jalan-sheet_0
+  - first:
+      213: 6156139428043999654
+    second: animasi nara jalan-sheet_1
+  - first:
+      213: -2651872724084754330
+    second: animasi nara jalan-sheet_2
+  - first:
+      213: 3223308727014044131
+    second: animasi nara jalan-sheet_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -96,40 +105,93 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: kanopi_0
+      name: animasi nara jalan-sheet_0
       rect:
         serializedVersion: 2
-        x: 149
-        y: 799
-        width: 2292
-        height: 472
+        x: 0
+        y: 0
+        width: 33
+        height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 6ad5167a7ab7a3f90800000000000000
-      internalID: -6973125113031860826
+      spriteID: d773cf457162d454ea466355b022bc2a
+      internalID: -385143309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animasi nara jalan-sheet_1
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 0
+        width: 33
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c4a5f1b84deb0442830d8729ebd8014
+      internalID: 668589942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animasi nara jalan-sheet_2
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 0
+        width: 33
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eec4949cd99d24644861df844af2f8d4
+      internalID: -1970580053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animasi nara jalan-sheet_3
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 0
+        width: 33
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 439965f2218dd2141b2460aed25dfcde
+      internalID: 948174830
       vertices: []
       indices: 
       edges: []
@@ -138,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: cbfb4f93d4d4c574996374fa5ef4ded2
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      kanopi_0: -6973125113031860826
+      animasi nara jalan-sheet_0: -385143309
+      animasi nara jalan-sheet_1: 668589942
+      animasi nara jalan-sheet_2: -1970580053
+      animasi nara jalan-sheet_3: 948174830
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

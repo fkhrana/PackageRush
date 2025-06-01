@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance; // Singleton
-    public int itemsCollected = 0; // Menghitung item yang dikumpulkan
-    public int requiredItems = 3; // Jumlah item yang dibutuhkan
-    public GameObject door; // Referensi ke pintu
+    public static GameManager instance;
+    public int itemsCollected = 0;
+    public int requiredItems = 3;
+    public int score = 0;
+    public GameObject door;
+    public bool isGameFinished = false;
 
     private void Awake()
     {
@@ -23,23 +23,71 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("Scene loaded: " + scene.name);
+        if (scene.name == "SampleScene")
+        {
+            Debug.Log("Resetting GameManager for SampleScene");
+            itemsCollected = 0;
+            score = 0;
+            isGameFinished = false;
+            door = GameObject.FindWithTag("Door");
+            if (door != null)
+            {
+                door.GetComponent<Collider2D>().isTrigger = false;
+                Debug.Log("Door found and reset");
+            }
+            else
+            {
+                Debug.LogError("Door not found! Ensure the door has the 'Door' tag.");
+            }
+
+            Score scoreComponent = FindFirstObjectByType<Score>();
+            if (scoreComponent != null)
+            {
+                scoreComponent.ResetScore();
+                Debug.Log("Score component reset");
+            }
+            else
+            {
+                Debug.LogWarning("Score component not found in scene!");
+            }
+        }
+    }
+
     public void CollectItem()
     {
+        if (isGameFinished) return;
         itemsCollected++;
-        Debug.Log("Items collected: " + itemsCollected);
+        Debug.Log($"Item collected, total: {itemsCollected}/{requiredItems}");
 
-        // Cek apakah semua item sudah dikumpulkan
-        if (itemsCollected >= requiredItems)
+        if (itemsCollected >= requiredItems && door != null)
         {
             UnlockDoor();
         }
     }
 
+    public void AddScore(int points) // Dipanggil oleh PickUp.cs
+    {
+        if (isGameFinished) return;
+        score += points;
+        Debug.Log($"Score updated: {score}");
+    }
+
     private void UnlockDoor()
     {
-        // Misalnya, nonaktifkan collider pintu atau ubah sprite pintu
-        door.GetComponent<Collider2D>().isTrigger = true; // Aktifkan trigger pintu
-        // Opsional: Ubah sprite pintu untuk menunjukkan pintu terbuka
-        // door.GetComponent<SpriteRenderer>().sprite = openDoorSprite;
+        door.GetComponent<Collider2D>().isTrigger = true;
+        Debug.Log("Door unlocked");
     }
 }

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2035fb4c18198b64e95021195505dfa1
+guid: de850e767a216d948b88431140084bb4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6973125113031860826
-    second: kanopi_0
+      213: 3974244485647260616
+    second: gedung 2 polos_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: kanopi_0
+      name: gedung 2 polos_0
       rect:
         serializedVersion: 2
-        x: 149
-        y: 799
-        width: 2292
-        height: 472
+        x: 227
+        y: 0
+        width: 2654
+        height: 3840
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6ad5167a7ab7a3f90800000000000000
-      internalID: -6973125113031860826
+      spriteID: 8cb5f81ad4a572730800000000000000
+      internalID: 3974244485647260616
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      kanopi_0: -6973125113031860826
+      gedung 2 polos_0: 3974244485647260616
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
