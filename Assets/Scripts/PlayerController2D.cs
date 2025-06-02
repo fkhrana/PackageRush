@@ -21,14 +21,9 @@ public class PlayerController2D : MonoBehaviour
     private int currentHealth;
     private bool isGrounded;
     private bool isBlinking = false;
-
-<<<<<<< HEAD
     public Animator animator;
 
-    void Start()
-=======
     private void Start()
->>>>>>> d71cd88365b2cf4843ed009f67bcb5bae0d7ef65
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
