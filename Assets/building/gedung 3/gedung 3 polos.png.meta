@@ -1,31 +1,10 @@
 fileFormatVersion: 2
-guid: d089f20a37a44df489e19cc970e4bd39
+guid: d4c9886bd3ac2ae49b194f6248f496cf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7207467912379626926
-    second: animasi nara idle-Sheet_0
-  - first:
-      213: -5583185718786747078
-    second: animasi nara idle-Sheet_1
-  - first:
-      213: -1577933090170195562
-    second: animasi nara idle-Sheet_2
-  - first:
-      213: 7264256005146095296
-    second: animasi nara idle-Sheet_3
-  - first:
-      213: 5745573618422291637
-    second: animasi nara idle-Sheet_4
-  - first:
-      213: 1285815991362975826
-    second: animasi nara idle-Sheet_5
-  - first:
-      213: -6666897314195094882
-    second: animasi nara idle-Sheet_6
-  - first:
-      213: -2173563643171048941
-    second: animasi nara idle-Sheet_7
+      213: -3242056348101770870
+    second: gedung 3 polos_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -121,89 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: animasi nara idle-Sheet_0
+      name: gedung 3 polos_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 18
         y: 0
-        width: 64
-        height: 64
+        width: 222
+        height: 408
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 2477d2a53150a6c418ee940cec20ed31
-      internalID: -425552662
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: animasi nara idle-Sheet_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4bbc890fceffaa349b5f8609eb6693ee
-      internalID: 1018425443
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: animasi nara idle-Sheet_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 219c6d02460d5634aa8898b238886802
-      internalID: -1066484369
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: animasi nara idle-Sheet_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: edbfe44fe0473f4479b2f57be770cada
-      internalID: -1552900659
+      spriteID: a810895bde6e103d0800000000000000
+      internalID: -3242056348101770870
       vertices: []
       indices: 
       edges: []
@@ -212,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9d3f5b82715ded24c99384612a9b501c
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -221,11 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      animasi nara idle-Sheet_0: -425552662
-      animasi nara idle-Sheet_1: 1018425443
-      animasi nara idle-Sheet_2: -1066484369
-      animasi nara idle-Sheet_3: -1552900659
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

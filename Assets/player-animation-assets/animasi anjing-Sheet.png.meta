@@ -1,31 +1,19 @@
 fileFormatVersion: 2
-guid: d089f20a37a44df489e19cc970e4bd39
+guid: af5ab8b6ab2d35b4ca31b0db4e961076
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7207467912379626926
-    second: animasi nara idle-Sheet_0
+      213: -776968847817056209
+    second: animasi anjing-Sheet_0
   - first:
-      213: -5583185718786747078
-    second: animasi nara idle-Sheet_1
+      213: 4665733167596208334
+    second: animasi anjing-Sheet_1
   - first:
-      213: -1577933090170195562
-    second: animasi nara idle-Sheet_2
+      213: -1678134008510239451
+    second: animasi anjing-Sheet_2
   - first:
-      213: 7264256005146095296
-    second: animasi nara idle-Sheet_3
-  - first:
-      213: 5745573618422291637
-    second: animasi nara idle-Sheet_4
-  - first:
-      213: 1285815991362975826
-    second: animasi nara idle-Sheet_5
-  - first:
-      213: -6666897314195094882
-    second: animasi nara idle-Sheet_6
-  - first:
-      213: -2173563643171048941
-    second: animasi nara idle-Sheet_7
+      213: -6432011981799414274
+    second: animasi anjing-Sheet_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -121,7 +109,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: animasi nara idle-Sheet_0
+      name: animasi anjing-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -136,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2477d2a53150a6c418ee940cec20ed31
-      internalID: -425552662
+      spriteID: 8add499491f21ec4987a638b00755a63
+      internalID: -1932370876
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animasi nara idle-Sheet_1
+      name: animasi anjing-Sheet_1
       rect:
         serializedVersion: 2
         x: 64
@@ -158,14 +146,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4bbc890fceffaa349b5f8609eb6693ee
-      internalID: 1018425443
+      spriteID: 54799a631fcb0de4aad9e3efc0a883fb
+      internalID: 1707636702
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animasi nara idle-Sheet_2
+      name: animasi anjing-Sheet_2
       rect:
         serializedVersion: 2
         x: 128
@@ -180,14 +168,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 219c6d02460d5634aa8898b238886802
-      internalID: -1066484369
+      spriteID: d4bead6edf713e042b36ca53a344872e
+      internalID: 795534468
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animasi nara idle-Sheet_3
+      name: animasi anjing-Sheet_3
       rect:
         serializedVersion: 2
         x: 192
@@ -202,8 +190,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: edbfe44fe0473f4479b2f57be770cada
-      internalID: -1552900659
+      spriteID: 88e0aeb5794249643a25f3366c4b5e89
+      internalID: -562326826
       vertices: []
       indices: 
       edges: []
@@ -212,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9d3f5b82715ded24c99384612a9b501c
+    spriteID: 4fe736dbaaa08d4489bf0df42458d068
     internalID: 0
     vertices: []
     indices: 
@@ -222,10 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      animasi nara idle-Sheet_0: -425552662
-      animasi nara idle-Sheet_1: 1018425443
-      animasi nara idle-Sheet_2: -1066484369
-      animasi nara idle-Sheet_3: -1552900659
+      animasi anjing-Sheet_0: -1932370876
+      animasi anjing-Sheet_1: 1707636702
+      animasi anjing-Sheet_2: 795534468
+      animasi anjing-Sheet_3: -562326826
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
