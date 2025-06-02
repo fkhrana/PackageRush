@@ -6,6 +6,7 @@ public class CollectibleItem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("you touched my tralala");
         if (isCollected || (GameManager.instance != null && GameManager.instance.isGameFinished)) return;
         if (other.CompareTag("Player"))
         {

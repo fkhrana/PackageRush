@@ -68,12 +68,16 @@ public class GameManager : MonoBehaviour
 
     public void CollectItem()
     {
+        Debug.Log("Collect Item called");
         if (isGameFinished) return;
         itemsCollected++;
         Debug.Log($"Item collected, total: {itemsCollected}/{requiredItems}");
 
+        Debug.Log("item colected");
         if (itemsCollected >= requiredItems && door != null)
         {
+
+            Debug.Log("door unlocked");
             UnlockDoor();
         }
     }

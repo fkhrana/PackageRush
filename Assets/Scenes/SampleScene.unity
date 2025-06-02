@@ -813,6 +813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemsCollected: 0
   requiredItems: 3
+  score: 0
   door: {fileID: 1414834124}
   isGameFinished: 0
 --- !u!4 &189375704
@@ -4218,7 +4219,7 @@ Transform:
   m_GameObject: {fileID: 1184685805}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.635, y: -4.624, z: 0}
+  m_LocalPosition: {x: 61.83, y: -4.624, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
