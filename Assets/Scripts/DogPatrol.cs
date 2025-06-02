@@ -18,11 +18,6 @@ public class DogPatrol : MonoBehaviour
         playerTransform = FindFirstObjectByType<PlayerController2D>().gameObject.transform;
     }
 
-    void Start()
-    {
-        playerTransform = FindFirstObjectByType<PlayerController2D>().gameObject.transform;
-    }
-
     void Update()
     {
         if (!isGrounded)
