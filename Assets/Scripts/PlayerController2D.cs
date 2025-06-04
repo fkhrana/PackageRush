@@ -33,22 +33,34 @@ public class PlayerController2D : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.instance != null && GameManager.instance.isGameFinished) 
+        if (GameManager.instance != null && GameManager.instance.isGameFinished)
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
             return;
         }
 
-        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveX = Input.GetAxisRaw("Horizontal"); //-1 -- 1
         rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
-        animator.SetFloat("Speed", moveX * moveSpeed);
+        animator.SetFloat("Speed", Mathf.Abs(moveX * moveSpeed));
 
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
         }
-    }
+
+        if (moveX > 0) // 0.1, 0.2
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (moveX < 0) // -0.1
+        {
+            spriteRenderer.flipX = false;
+        }
+        else // movex = 0
+        {
+        }
+     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {

@@ -13,6 +13,8 @@ public class DogPatrol : MonoBehaviour
     public float chaseDistance;
 
     private bool isGrounded;
+
+    public SpriteRenderer spriteRenderer;
     void Start()
     {
         playerTransform = FindFirstObjectByType<PlayerController2D>().gameObject.transform;
@@ -37,17 +39,17 @@ public class DogPatrol : MonoBehaviour
             {
                 if (transform.position.x > playerTransform.position.x)
                 {
-                    transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                    spriteRenderer.flipX = true;
                     transform.position += Vector3.left * moveSpeed * Time.deltaTime; 
                 }
                 else if (transform.position.x < playerTransform.position.x)
                 {
-                    transform.localScale = new Vector3(-0.6f, 0.6f, 0.6f);
+                    spriteRenderer.flipX = false;
                     transform.position += Vector3.right * moveSpeed * Time.deltaTime;
                 }
             }
         }
-        else
+        else // note: not chasing, patrolling
         {
             if (distanceToPlayer < chaseDistance)
             {
@@ -59,7 +61,7 @@ public class DogPatrol : MonoBehaviour
                 transform.position = Vector2.MoveTowards(transform.position, patrolPoints[0].position, moveSpeed * Time.deltaTime);
                 if (Vector2.Distance(transform.position, patrolPoints[0].position) < 0.2f)
                 {
-                    transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                    spriteRenderer.flipX = true;
                     patrolDestination = 1;
                 }
             }
@@ -68,7 +70,7 @@ public class DogPatrol : MonoBehaviour
                 transform.position = Vector2.MoveTowards(transform.position, patrolPoints[1].position, moveSpeed * Time.deltaTime);
                 if (Vector2.Distance(transform.position, patrolPoints[1].position) < 0.2f)
                 {
-                    transform.localScale = new Vector3(-0.6f, 0.6f, 0.6f);
+                    spriteRenderer.flipX = false;
                     patrolDestination = 0;
                 }
             }

@@ -603,6 +603,7 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   isChasing: 0
   chaseDistance: 5
+  spriteRenderer: {fileID: 58968409}
 --- !u!70 &58968407
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -713,7 +714,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -1932370876, guid: af5ab8b6ab2d35b4ca31b0db4e961076, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 2}
@@ -731,7 +732,7 @@ Transform:
   m_GameObject: {fileID: 58968405}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.0013489022, w: 0.9999991}
-  m_LocalPosition: {x: 51.38, y: -4.51, z: 0}
+  m_LocalPosition: {x: 48.55, y: -4.52, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4707,8 +4708,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 543102727
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 266389463061760683, guid: 9f82dc27c5b81aa41983f73718e03189, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5005,7 +5006,7 @@ GameObject:
   - component: {fileID: 1426524370}
   m_Layer: 0
   m_Name: Square (8)
-  m_TagString: Ground
+  m_TagString: Balik
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
