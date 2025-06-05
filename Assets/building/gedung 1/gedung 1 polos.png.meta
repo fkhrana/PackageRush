@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      gedung 1 polos_0: -6164904041360501630
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

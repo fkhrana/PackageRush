@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4d78ea4704f704241adaab4c391798a6
+guid: a3f844849a6ceb244926d16e8da9ad94
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7410602693137165012
-    second: Genteng - Copy_0
+      213: 3616512531535755360
+    second: bell_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -96,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Genteng - Copy_0
+      name: bell_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 2
         y: 0
-        width: 360
-        height: 100
+        width: 60
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c2591081d10482990800000000000000
-      internalID: -7410602693137165012
+      spriteID: 068ffef7cfe603230800000000000000
+      internalID: 3616512531535755360
       vertices: []
       indices: 
       edges: []
@@ -148,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Genteng - Copy_0: -7410602693137165012
+      bell_0: 3616512531535755360
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

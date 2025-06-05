@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 44e5cb302bf61c445a79ae9664a0b253
+guid: d842aaab64ecc7e42b36aa984e13dffa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2654992592892554849
-    second: genteng oren_0
+      213: 4948933554451466441
+    second: telephone_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: genteng oren_0
+      name: telephone_0
       rect:
         serializedVersion: 2
-        x: 33
-        y: 437
-        width: 452
-        height: 148
+        x: 19
+        y: 15
+        width: 45
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 16e67ac42bd68d420800000000000000
-      internalID: 2654992592892554849
+      spriteID: 9c84712e8d42ea440800000000000000
+      internalID: 4948933554451466441
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      genteng oren_0: 2654992592892554849
+      telephone_0: 4948933554451466441
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

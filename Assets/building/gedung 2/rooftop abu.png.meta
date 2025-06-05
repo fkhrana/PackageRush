@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      rooftop abu_0: -7228187716189843340
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
