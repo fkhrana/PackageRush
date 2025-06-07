@@ -10,74 +10,119 @@ public class DogPatrol : MonoBehaviour
 
     public Transform playerTransform;
     public bool isChasing;
-    public float chaseDistance;
+    public float chaseDistanceX;
+    public float chaseDistanceY;
 
     private bool isGrounded;
 
     public SpriteRenderer spriteRenderer;
+    private Rigidbody2D rb;
+    private Collider2D boxCollider;
+
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
         playerTransform = FindFirstObjectByType<PlayerController2D>().gameObject.transform;
+
+        // Abaikan tabrakan fisik dengan player
+        Collider2D playerCollider = playerTransform.GetComponent<Collider2D>();
+        if (playerCollider != null)
+        {
+            Physics2D.IgnoreCollision(boxCollider, playerCollider);
+        }
     }
 
     void Update()
     {
         if (!isGrounded)
         {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
             return;
         }
 
-        float distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
+        // Hitung perbedaan koordinat X dan Y
+        float deltaX = Mathf.Abs(transform.position.x - playerTransform.position.x);
+        float deltaY = Mathf.Abs(transform.position.y - playerTransform.position.y);
 
         if (isChasing)
         {
-            if (distanceToPlayer > chaseDistance)
+            // Cek jika player di luar area persegi panjang atau ada penghalang
+            if (deltaX > chaseDistanceX || deltaY > chaseDistanceY)
             {
-                isChasing = false; 
+                isChasing = false;
             }
             else
             {
-                if (transform.position.x > playerTransform.position.x)
+                // Cek penghalang dengan raycast
+                Vector2 direction = (playerTransform.position - transform.position).normalized;
+                RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0), direction, Vector2.Distance(transform.position, playerTransform.position), LayerMask.GetMask("Obstacles"));
+                if (hit.collider != null && hit.collider.CompareTag("Box"))
                 {
-                    spriteRenderer.flipX = true;
-                    transform.position += Vector3.left * moveSpeed * Time.deltaTime; 
+                    isChasing = false;
                 }
-                else if (transform.position.x < playerTransform.position.x)
+                else
                 {
-                    spriteRenderer.flipX = false;
-                    transform.position += Vector3.right * moveSpeed * Time.deltaTime;
+                    // Gerakkan anjing menuju player menggunakan Rigidbody2D
+                    if (transform.position.x > playerTransform.position.x)
+                    {
+                        spriteRenderer.flipX = true;
+                        rb.linearVelocity = new Vector2(-moveSpeed, rb.linearVelocity.y);
+                    }
+                    else if (transform.position.x < playerTransform.position.x)
+                    {
+                        spriteRenderer.flipX = false;
+                        rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
+                    }
                 }
             }
         }
-        else // note: not chasing, patrolling
+        else // Mode patrol
         {
-            if (distanceToPlayer < chaseDistance)
+            // Cek jika player dalam area persegi panjang
+            if (deltaX < chaseDistanceX && deltaY < chaseDistanceY)
             {
-                isChasing = true;
+                Vector2 direction = (playerTransform.position - transform.position).normalized;
+                RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0), direction, Vector2.Distance(transform.position, playerTransform.position), LayerMask.GetMask("Obstacles"));
+                if (hit.collider == null || !hit.collider.CompareTag("Box"))
+                {
+                    isChasing = true;
+                }
             }
 
+            // Patrol menggunakan MoveTowards
+            Vector2 targetPosition = patrolDestination == 0 ? patrolPoints[0].position : patrolPoints[1].position;
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+
+            // Atur arah sprite berdasarkan pergerakan menuju titik patrol
+            if (transform.position.x > targetPosition.x)
+            {
+                spriteRenderer.flipX = true; // Menghadap kiri
+            }
+            else if (transform.position.x < targetPosition.x)
+            {
+                spriteRenderer.flipX = false; // Menghadap kanan
+            }
+
+            // Cek jika sampai di titik patrol
             if (patrolDestination == 0)
             {
-                transform.position = Vector2.MoveTowards(transform.position, patrolPoints[0].position, moveSpeed * Time.deltaTime);
                 if (Vector2.Distance(transform.position, patrolPoints[0].position) < 0.2f)
                 {
-                    spriteRenderer.flipX = true;
                     patrolDestination = 1;
                 }
             }
             else if (patrolDestination == 1)
             {
-                transform.position = Vector2.MoveTowards(transform.position, patrolPoints[1].position, moveSpeed * Time.deltaTime);
                 if (Vector2.Distance(transform.position, patrolPoints[1].position) < 0.2f)
                 {
-                    spriteRenderer.flipX = false;
                     patrolDestination = 0;
                 }
             }
         }
     }
-    #region ground check
 
+    #region ground check
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Platform"))
@@ -99,7 +144,17 @@ public class DogPatrol : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            isChasing = true;
+            float deltaX = Mathf.Abs(transform.position.x - playerTransform.position.x);
+            float deltaY = Mathf.Abs(transform.position.y - playerTransform.position.y);
+            if (deltaX < chaseDistanceX && deltaY < chaseDistanceY)
+            {
+                Vector2 direction = (playerTransform.position - transform.position).normalized;
+                RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0), direction, Vector2.Distance(transform.position, playerTransform.position), LayerMask.GetMask("Obstacles"));
+                if (hit.collider == null || !hit.collider.CompareTag("Box"))
+                {
+                    isChasing = true;
+                }
+            }
         }
     }
 
@@ -108,6 +163,27 @@ public class DogPatrol : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             isChasing = false;
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Vector3 topLeft = new Vector3(transform.position.x - chaseDistanceX, transform.position.y + chaseDistanceY, transform.position.z);
+        Vector3 topRight = new Vector3(transform.position.x + chaseDistanceX, transform.position.y + chaseDistanceY, transform.position.z);
+        Vector3 bottomLeft = new Vector3(transform.position.x - chaseDistanceX, transform.position.y - chaseDistanceY, transform.position.z);
+        Vector3 bottomRight = new Vector3(transform.position.x + chaseDistanceX, transform.position.y - chaseDistanceY, transform.position.z);
+
+        Gizmos.DrawLine(topLeft, topRight);
+        Gizmos.DrawLine(topRight, bottomRight);
+        Gizmos.DrawLine(bottomRight, bottomLeft);
+        Gizmos.DrawLine(bottomLeft, topLeft);
+
+        if (playerTransform != null)
+        {
+            Vector2 direction = (playerTransform.position - transform.position).normalized;
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawRay(transform.position + new Vector3(0, 0.5f, 0), direction * Mathf.Max(chaseDistanceX, chaseDistanceY));
         }
     }
 }

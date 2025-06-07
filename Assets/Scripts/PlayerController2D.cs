@@ -60,11 +60,11 @@ public class PlayerController2D : MonoBehaviour
         else // movex = 0
         {
         }
-     }
+    }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Platform"))
+        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Platform") || other.gameObject.CompareTag("Box"))
         {
             isGrounded = true;
         }
