@@ -1225,7 +1225,6 @@ MonoBehaviour:
   isChasing: 1
   chaseDistanceX: 5
   chaseDistanceY: 2
-  maxStuckTime: 2
   spriteRenderer: {fileID: 58968409}
 --- !u!70 &58968407
 CapsuleCollider2D:
@@ -8344,7 +8343,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -8387,9 +8386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e961ca2586fc6f4ea9fe13f8b190514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  smoothSpeed: 0.125
-  offset: {x: 2, y: 0, z: -10}
 --- !u!1 &529679958
 GameObject:
   m_ObjectHideFlags: 0
@@ -12640,11 +12636,11 @@ RectTransform:
   - {fileID: 1634994752}
   m_Father: {fileID: 456249582}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -273.9226, y: 94.44647}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -273.92264, y: -16}
   m_SizeDelta: {x: 265.18103, y: 43.226807}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &806017333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17470,7 +17466,7 @@ Transform:
   m_GameObject: {fileID: 1184685805}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 54.33, y: -4.01, z: 0}
+  m_LocalPosition: {x: -3.34, y: -4.16, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17544,6 +17540,8 @@ MonoBehaviour:
   jumpForce: 6.5
   moveSpeed: 5
   maxHealth: 100
+  minX: -15
+  maxX: 140
   animator: {fileID: 1184685808}
 --- !u!70 &1184685812
 CapsuleCollider2D:
@@ -23728,11 +23726,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 456249582}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -151, y: 94}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -150.99998, y: -2.0000153}
   m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1604646609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24227,7 +24225,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.0097046, y: 0.06272125}
+  m_AnchoredPosition: {x: -1.0097046, y: 0.06271362}
   m_SizeDelta: {x: -213.74, y: -34.753}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1634994753
@@ -32997,6 +32995,7 @@ SceneRoots:
   - {fileID: 189375704}
   - {fileID: 1184685807}
   - {fileID: 619394802}
+  - {fileID: 456249582}
   - {fileID: 876868468}
   - {fileID: 1297775386}
   - {fileID: 2080984182}
@@ -33013,7 +33012,6 @@ SceneRoots:
   - {fileID: 1142047417}
   - {fileID: 1363262884}
   - {fileID: 1399363925}
-  - {fileID: 456249582}
   - {fileID: 707016844}
   - {fileID: 1047311581}
   - {fileID: 1955425993}

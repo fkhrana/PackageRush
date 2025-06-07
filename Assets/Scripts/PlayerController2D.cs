@@ -15,6 +15,8 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private int maxHealth = 100;
+    [SerializeField] private float minX; // Batas kiri (X minimum)
+    [SerializeField] private float maxX; // Batas kanan (X maksimum)
 
     // Internal State
     [Header("State")]
@@ -60,6 +62,10 @@ public class PlayerController2D : MonoBehaviour
         else // movex = 0
         {
         }
+
+        // Batasi posisi X player
+        float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
+        transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -125,5 +131,13 @@ public class PlayerController2D : MonoBehaviour
         }
 
         isBlinking = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        // Visualisasi batas minX dan maxX
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(new Vector3(minX, -10, 0), new Vector3(minX, 10, 0));
+        Gizmos.DrawLine(new Vector3(maxX, -10, 0), new Vector3(maxX, 10, 0));
     }
 }
