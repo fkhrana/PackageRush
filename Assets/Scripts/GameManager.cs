@@ -9,8 +9,7 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     public GameObject door;
     public bool isGameFinished = false;
-    private CollectibleUI collectibleUI; // Referensi ke UI
-
+    private CollectibleUI collectibleUI;
     private void Awake()
     {
         if (instance == null)
@@ -55,7 +54,6 @@ public class GameManager : MonoBehaviour
                 Debug.LogError("Door not found! Ensure the door has the 'Door' tag.");
             }
 
-            // Cari CollectibleUI
             collectibleUI = FindFirstObjectByType<CollectibleUI>();
             if (collectibleUI != null)
             {
@@ -87,7 +85,6 @@ public class GameManager : MonoBehaviour
         itemsCollected++;
         Debug.Log($"Item collected, total: {itemsCollected}/{requiredItems}");
 
-        // Update UI ikon
         if (collectibleUI != null)
         {
             collectibleUI.UpdateIcon(itemIndex);

@@ -15,8 +15,8 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private int maxHealth = 100;
-    [SerializeField] private float minX; // Batas kiri (X minimum)
-    [SerializeField] private float maxX; // Batas kanan (X maksimum)
+    [SerializeField] private float minX;
+    [SerializeField] private float maxX;
 
     // Internal State
     [Header("State")]
@@ -41,7 +41,7 @@ public class PlayerController2D : MonoBehaviour
             return;
         }
 
-        float moveX = Input.GetAxisRaw("Horizontal"); //-1 -- 1
+        float moveX = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
         animator.SetFloat("Speed", Mathf.Abs(moveX * moveSpeed));
 
@@ -51,19 +51,16 @@ public class PlayerController2D : MonoBehaviour
             isGrounded = false;
         }
 
-        if (moveX > 0) // 0.1, 0.2
+        if (moveX > 0)
         {
             spriteRenderer.flipX = true;
         }
-        else if (moveX < 0) // -0.1
+        else if (moveX < 0)
         {
             spriteRenderer.flipX = false;
         }
-        else // movex = 0
-        {
-        }
 
-        // Batasi posisi X player
+        // batas posisi X player
         float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
         transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
     }
@@ -72,7 +69,14 @@ public class PlayerController2D : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Platform") || other.gameObject.CompareTag("Box"))
         {
-            isGrounded = true;
+            foreach (ContactPoint2D contact in other.contacts)
+            {
+                if (contact.normal.y > 0.5f)
+                {
+                    isGrounded = true;
+                    break;
+                }
+            }
         }
     }
 
@@ -80,19 +84,18 @@ public class PlayerController2D : MonoBehaviour
     {
         if (GameManager.instance != null && GameManager.instance.isGameFinished) return;
 
-        if (other.CompareTag("Item")) // Item untuk score, ditangani oleh PickUp.cs
+        if (other.CompareTag("Item"))
         {
             Debug.Log("Player touched score item: " + other.gameObject.name);
             Destroy(other.gameObject);
         }
-        else if (other.CompareTag("Collectible")) // Item untuk pintu, ditangani oleh CollectibleItem.cs
+        else if (other.CompareTag("WaterObstacle") || other.CompareTag("Police") || other.CompareTag("Dog"))
         {
-            Debug.Log("Player touched collectible item: " + other.gameObject.name);
-        }
-        else if ((other.CompareTag("WaterObstacle") || other.CompareTag("Police") || other.CompareTag("Dog")) && !isBlinking)
-        {
-            StartCoroutine(BlinkEffect());
-            TakeDamage(20);
+            if (!isBlinking)
+            {
+                StartCoroutine(BlinkEffect());
+                TakeDamage(20);
+            }
         }
     }
 
@@ -135,7 +138,6 @@ public class PlayerController2D : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        // Visualisasi batas minX dan maxX
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(new Vector3(minX, -10, 0), new Vector3(minX, 10, 0));
         Gizmos.DrawLine(new Vector3(maxX, -10, 0), new Vector3(maxX, 10, 0));

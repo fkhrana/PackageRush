@@ -1,19 +1,22 @@
 fileFormatVersion: 2
-guid: 967ebea0b2b22814c9ab4a528ac9ae95
+guid: 6a23553d3380e0f46a42ffc4b1696642
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4218750589861745397
-    second: animasi nara jalan-sheet_0
+      213: 317010468468323505
+    second: gameover_0
   - first:
-      213: 6156139428043999654
-    second: animasi nara jalan-sheet_1
+      213: 4500970960352770634
+    second: gameover_1
   - first:
-      213: -2651872724084754330
-    second: animasi nara jalan-sheet_2
+      213: 7846820034637804003
+    second: gameover_2
   - first:
-      213: 3223308727014044131
-    second: animasi nara jalan-sheet_3
+      213: -1303687684276611485
+    second: gameover_3
+  - first:
+      213: 2200968303363549662
+    second: gameover_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -60,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -122,127 +125,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: animasi nara jalan-sheet_0
+      name: gameover_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 64
+        x: 24
+        y: 2
+        width: 1214
+        height: 641
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape:
-      - - {x: -3, y: 9}
-        - {x: -15, y: 9}
-        - {x: -15, y: -3}
-        - {x: 2, y: -3}
-        - {x: 2, y: -27}
-        - {x: 15, y: -27}
-        - {x: 15, y: 24}
-        - {x: -3, y: 24}
-      tessellationDetail: 0
+      physicsShape: []
+      tessellationDetail: -1
       bones: []
-      spriteID: d773cf457162d454ea466355b022bc2a
-      internalID: -385143309
+      spriteID: 1b4722b675f366400800000000000000
+      internalID: 317010468468323505
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animasi nara jalan-sheet_1
+      name: gameover_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
+        x: 1236
+        y: 562
+        width: 8
+        height: 8
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape:
-      - - {x: -3, y: 9}
-        - {x: -15, y: 9}
-        - {x: -15, y: -3}
-        - {x: 2, y: -3}
-        - {x: -7, y: -22}
-        - {x: -1, y: -27}
-        - {x: 18, y: -27}
-        - {x: 22, y: -21}
-        - {x: 15, y: -7}
-        - {x: 15, y: 23}
-        - {x: -3, y: 23}
-      tessellationDetail: 0
+      physicsShape: []
+      tessellationDetail: -1
       bones: []
-      spriteID: 9c4a5f1b84deb0442830d8729ebd8014
-      internalID: 668589942
+      spriteID: a4afc24cd39a67e30800000000000000
+      internalID: 4500970960352770634
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animasi nara jalan-sheet_2
+      name: gameover_2
       rect:
         serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
+        x: 1232
+        y: 536
+        width: 8
+        height: 8
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape:
-      - - {x: -3, y: 9}
-        - {x: -15, y: 9}
-        - {x: -15, y: -3}
-        - {x: 2, y: -3}
-        - {x: 2, y: -27}
-        - {x: 15, y: -27}
-        - {x: 15, y: 24}
-        - {x: -3, y: 24}
-      tessellationDetail: 0
+      physicsShape: []
+      tessellationDetail: -1
       bones: []
-      spriteID: eec4949cd99d24644861df844af2f8d4
-      internalID: -1970580053
+      spriteID: 3e1310d4f3185ec60800000000000000
+      internalID: 7846820034637804003
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animasi nara jalan-sheet_3
+      name: gameover_3
       rect:
         serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
+        x: 16
+        y: 239
+        width: 9
+        height: 10
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape:
-      - - {x: -3, y: 9}
-        - {x: -15, y: 9}
-        - {x: -15, y: -3}
-        - {x: 2, y: -3}
-        - {x: -7, y: -22}
-        - {x: -1, y: -27}
-        - {x: 18, y: -27}
-        - {x: 22, y: -21}
-        - {x: 15, y: -7}
-        - {x: 15, y: 23}
-        - {x: -3, y: 23}
-      tessellationDetail: 0
+      physicsShape: []
+      tessellationDetail: -1
       bones: []
-      spriteID: 439965f2218dd2141b2460aed25dfcde
-      internalID: 948174830
+      spriteID: 36614a855fe58ede0800000000000000
+      internalID: -1303687684276611485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gameover_4
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 222
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed9e0ebb2096b8e10800000000000000
+      internalID: 2200968303363549662
       vertices: []
       indices: 
       edges: []
@@ -251,7 +238,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: cbfb4f93d4d4c574996374fa5ef4ded2
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -261,10 +248,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      animasi nara jalan-sheet_0: -385143309
-      animasi nara jalan-sheet_1: 668589942
-      animasi nara jalan-sheet_2: -1970580053
-      animasi nara jalan-sheet_3: 948174830
+      gameover_0: 317010468468323505
+      gameover_1: 4500970960352770634
+      gameover_2: 7846820034637804003
+      gameover_3: -1303687684276611485
+      gameover_4: 2200968303363549662
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

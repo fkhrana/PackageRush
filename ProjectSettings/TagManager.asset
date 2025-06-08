@@ -63,6 +63,9 @@ TagManager:
   - name: Ground
     uniqueID: 1780325787
     locked: 0
+  - name: Kayu
+    uniqueID: 842930389
+    locked: 0
   - name: Player
     uniqueID: 4016835455
     locked: 0
@@ -74,6 +77,9 @@ TagManager:
     locked: 0
   - name: Item
     uniqueID: 327813663
+    locked: 0
+  - name: balkon
+    uniqueID: 1247336215
     locked: 0
   m_RenderingLayers:
   - Default

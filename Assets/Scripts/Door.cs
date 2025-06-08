@@ -3,14 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] private Sprite closedSprite; // Sprite pintu tertutup
-    [SerializeField] private Sprite openSprite; // Sprite pintu terbuka
+    [SerializeField] private Sprite closedSprite;
+    [SerializeField] private Sprite openSprite;
     private SpriteRenderer spriteRenderer;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = closedSprite; // Set sprite default ke tertutup
+        spriteRenderer.sprite = closedSprite;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -23,7 +23,7 @@ public class Door : MonoBehaviour
         }
     }
 
-    // Fungsi untuk mengganti sprite, dipanggil oleh GameManager
+    // ganti sprite tutup -> buka
     public void SetDoorSprite(bool isOpen)
     {
         spriteRenderer.sprite = isOpen ? openSprite : closedSprite;

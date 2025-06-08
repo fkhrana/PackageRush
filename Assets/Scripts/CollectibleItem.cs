@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CollectibleItem : MonoBehaviour
 {
-    [SerializeField] private int itemIndex; // Indeks item (0, 1, atau 2)
+    [SerializeField] private int itemIndex;
     private bool isCollected = false;
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -15,7 +15,7 @@ public class CollectibleItem : MonoBehaviour
             Debug.Log($"Collecting item: {gameObject.name}, index: {itemIndex}");
             if (GameManager.instance != null)
             {
-                GameManager.instance.CollectItem(itemIndex); // Kirim indeks item
+                GameManager.instance.CollectItem(itemIndex);
             }
             else
             {
