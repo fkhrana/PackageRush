@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 2b61e74ecaec5b84fb50ee16e68b7139
+guid: dbd768b824245a843b55417b32367b90
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3737897332693287829
-    second: Bar_0
+      213: -7153737968304927362
+    second: game over2_0
+  - first:
+      213: -8345897387452092214
+    second: game over2_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bar_0
+      name: game over2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 52
-        height: 9
+        x: 12
+        y: 101
+        width: 231
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +131,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5934012e1ddafd330800000000000000
-      internalID: 3737897332693287829
+      spriteID: e7dc5fe4831d8bc90800000000000000
+      internalID: -7153737968304927362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game over2_1
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 16
+        width: 231
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac0be096b8a6d2c80800000000000000
+      internalID: -8345897387452092214
       vertices: []
       indices: 
       edges: []
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Bar_0: 3737897332693287829
+      game over2_0: -7153737968304927362
+      game over2_1: -8345897387452092214
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

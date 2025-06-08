@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public int score = 0;
     public GameObject door;
     public bool isGameFinished = false;
+    private CollectibleUI collectibleUI; // Referensi ke UI
 
     private void Awake()
     {
@@ -45,12 +46,25 @@ public class GameManager : MonoBehaviour
             door = GameObject.FindWithTag("Door");
             if (door != null)
             {
-                door.GetComponent<Collider2D>().isTrigger = false;
-                Debug.Log("Door found and reset");
+                door.GetComponent<Collider2D>().isTrigger = true;
+                door.GetComponent<Door>().SetDoorSprite(false);
+                Debug.Log("Door found and set as trigger with closed sprite");
             }
             else
             {
                 Debug.LogError("Door not found! Ensure the door has the 'Door' tag.");
+            }
+
+            // Cari CollectibleUI
+            collectibleUI = FindFirstObjectByType<CollectibleUI>();
+            if (collectibleUI != null)
+            {
+                collectibleUI.ResetIcons();
+                Debug.Log("CollectibleUI found and icons reset");
+            }
+            else
+            {
+                Debug.LogWarning("CollectibleUI not found in scene!");
             }
 
             Score scoreComponent = FindFirstObjectByType<Score>();
@@ -66,32 +80,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CollectItem()
+    public void CollectItem(int itemIndex)
     {
         Debug.Log("Collect Item called");
         if (isGameFinished) return;
         itemsCollected++;
         Debug.Log($"Item collected, total: {itemsCollected}/{requiredItems}");
 
-        Debug.Log("item colected");
+        // Update UI ikon
+        if (collectibleUI != null)
+        {
+            collectibleUI.UpdateIcon(itemIndex);
+        }
+
         if (itemsCollected >= requiredItems && door != null)
         {
-
-            Debug.Log("door unlocked");
-            UnlockDoor();
+            Debug.Log("Setting door to open sprite");
+            door.GetComponent<Door>().SetDoorSprite(true);
         }
     }
 
-    public void AddScore(int points) // Dipanggil oleh PickUp.cs
+    public void AddScore(int points)
     {
         if (isGameFinished) return;
         score += points;
         Debug.Log($"Score updated: {score}");
-    }
-
-    private void UnlockDoor()
-    {
-        door.GetComponent<Collider2D>().isTrigger = true;
-        Debug.Log("Door unlocked");
     }
 }
