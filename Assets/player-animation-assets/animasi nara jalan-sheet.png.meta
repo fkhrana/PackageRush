@@ -135,8 +135,7 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: -1, y: 9}
-        - {x: 3, y: -2}
+      - - {x: 1, y: -2}
         - {x: 3, y: -26}
         - {x: 13, y: -26}
         - {x: 13, y: 24}
@@ -163,8 +162,7 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: -1, y: 7}
-        - {x: 3, y: -3}
+      - - {x: 3, y: -3}
         - {x: -6, y: -22}
         - {x: -1, y: -26}
         - {x: 18, y: -26}
@@ -194,8 +192,7 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: -1, y: 9}
-        - {x: 3, y: -2}
+      - - {x: 1, y: -2}
         - {x: 3, y: -26}
         - {x: 13, y: -26}
         - {x: 13, y: 24}
@@ -222,8 +219,7 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape:
-      - - {x: -1, y: 7}
-        - {x: 3, y: -3}
+      - - {x: 3, y: -3}
         - {x: -6, y: -22}
         - {x: -1, y: -26}
         - {x: 18, y: -26}

@@ -6,11 +6,13 @@ public class CameraFollow : MonoBehaviour
     public Transform player;
 
     [Header("Settings")]
-    public Vector3 offset = new Vector3(0, 1, -10);
+    public Vector3 offset = new Vector3(0, 0, 0);
     [Range(0f, 1f)]
     public float smoothSpeed = 0.125f;
 
-    [Header("Y Position Limits")]
+    [Header("Position Limits")]
+    public float minX = -10f;
+    public float maxX = 10f;
     public float minY = -2f;
     public float maxY = 5f;
 
@@ -36,6 +38,8 @@ public class CameraFollow : MonoBehaviour
 
         Vector3 desiredPosition = player.position + offset;
         desiredPosition.z = transform.position.z;
+
+        desiredPosition.x = Mathf.Clamp(desiredPosition.x, minX, maxX);
         desiredPosition.y = Mathf.Clamp(desiredPosition.y, minY, maxY);
 
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
@@ -45,20 +49,19 @@ public class CameraFollow : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
+        float left = minX;
+        float right = maxX;
+        float bottom = minY;
+        float top = maxY;
 
-        float leftX = Camera.main != null ? Camera.main.transform.position.x - 20f : -20f;
-        float rightX = Camera.main != null ? Camera.main.transform.position.x + 20f : 20f;
+        Vector3 topLeft = new Vector3(left, top, 0);
+        Vector3 topRight = new Vector3(right, top, 0);
+        Vector3 bottomLeft = new Vector3(left, bottom, 0);
+        Vector3 bottomRight = new Vector3(right, bottom, 0);
 
-        // Garis batas bawah (minY)
-        Gizmos.DrawLine(
-            new Vector3(leftX, minY, 0),
-            new Vector3(rightX, minY, 0)
-        );
-
-        // Garis batas atas (maxY)
-        Gizmos.DrawLine(
-            new Vector3(leftX, maxY, 0),
-            new Vector3(rightX, maxY, 0)
-        );
+        Gizmos.DrawLine(topLeft, topRight);
+        Gizmos.DrawLine(topRight, bottomRight);
+        Gizmos.DrawLine(bottomRight, bottomLeft);
+        Gizmos.DrawLine(bottomLeft, topLeft); 
     }
 }
