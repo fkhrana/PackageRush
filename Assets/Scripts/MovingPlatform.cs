@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    public float speed = 2f; // Kecepatan gerak platform
-    public float distance = 5f; // Jarak patrol (kanan/kiri dari posisi awal)
+    public float speed = 2f;
+    public float distance = 5f;
     private Vector3 startPosition;
     private bool movingRight = true; 
 

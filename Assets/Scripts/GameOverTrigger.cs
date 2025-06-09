@@ -13,6 +13,6 @@ public class GameOverTrigger : MonoBehaviour
 
     private void GameOver()
     {
-        SceneManager.LoadScene("GameOver"); // Ganti dengan nama scene Game Over
+        SceneManager.LoadScene("GameOver");
     }
 }
