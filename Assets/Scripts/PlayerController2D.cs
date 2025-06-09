@@ -31,6 +31,10 @@ public class PlayerController2D : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        if (AudioManager.instance == null)
+        {
+            Debug.LogError("AudioManager not found! Please add AudioManager to the scene.");
+        }
     }
 
     private void Update()
@@ -87,14 +91,35 @@ public class PlayerController2D : MonoBehaviour
         if (other.CompareTag("Item"))
         {
             Debug.Log("Player touched score item: " + other.gameObject.name);
+            AudioManager.instance.PlaySoundEffect("StarCollect");
+            GameManager.instance.AddScore(1);
             Destroy(other.gameObject);
         }
-        else if (other.CompareTag("WaterObstacle") || other.CompareTag("Police") || other.CompareTag("Dog"))
+        else if (other.CompareTag("WaterObstacle"))
         {
             if (!isBlinking)
             {
                 StartCoroutine(BlinkEffect());
                 TakeDamage(20);
+                AudioManager.instance.PlaySoundEffect("WaterSplash");
+            }
+        }
+        else if (other.CompareTag("Police"))
+        {
+            if (!isBlinking)
+            {
+                StartCoroutine(BlinkEffect());
+                TakeDamage(20);
+                AudioManager.instance.PlaySoundEffect("PoliceHit");
+            }
+        }
+        else if (other.CompareTag("Dog"))
+        {
+            if (!isBlinking)
+            {
+                StartCoroutine(BlinkEffect());
+                TakeDamage(20);
+                AudioManager.instance.PlaySoundEffect("DogHit");
             }
         }
     }
@@ -113,6 +138,8 @@ public class PlayerController2D : MonoBehaviour
                 GameManager.instance.isGameFinished = true;
             }
             Debug.Log("Game Over: Health depleted!");
+            AudioManager.instance.PlaySoundEffect("GameOver");
+            AudioManager.instance.StopBackgroundMusic();
             SceneManager.LoadScene("GameOver");
         }
     }

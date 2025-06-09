@@ -11,6 +11,10 @@ public class Door : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = closedSprite;
+        if (AudioManager.instance == null)
+        {
+            Debug.LogError("AudioManager not found! Please add AudioManager to the scene.");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -18,12 +22,13 @@ public class Door : MonoBehaviour
         if (other.CompareTag("Player") && GameManager.instance != null && GameManager.instance.itemsCollected >= GameManager.instance.requiredItems)
         {
             GameManager.instance.isGameFinished = true;
+            AudioManager.instance.PlaySoundEffect("Win");
+            AudioManager.instance.StopBackgroundMusic();
             Debug.Log("Game Won! Player entered door.");
             SceneManager.LoadScene("GameWin");
         }
     }
 
-    // ganti sprite tutup -> buka
     public void SetDoorSprite(bool isOpen)
     {
         spriteRenderer.sprite = isOpen ? openSprite : closedSprite;
