@@ -63,7 +63,7 @@ TagManager:
   - name: Ground
     uniqueID: 1780325787
     locked: 0
-  - name: Kayu
+  - name: Kayu, box, kardus, tong
     uniqueID: 842930389
     locked: 0
   - name: Player
