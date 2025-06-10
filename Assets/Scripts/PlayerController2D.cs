@@ -92,7 +92,6 @@ public class PlayerController2D : MonoBehaviour
         {
             Debug.Log("Player touched score item: " + other.gameObject.name);
             AudioManager.instance.PlaySoundEffect("StarCollect");
-            GameManager.instance.AddScore(1);
             Destroy(other.gameObject);
         }
         else if (other.CompareTag("WaterObstacle"))
