@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Collect Item called with index: {itemIndex}");
         if (isGameFinished || itemIndex < 0 || itemIndex >= collectedItems.Length) return;
 
-        if (!collectedItems[itemIndex])
+        if (!collectedItems[itemIndex]) // Hanya collect jika belum dikumpul
         {
             collectedItems[itemIndex] = true;
             itemsCollected++;
