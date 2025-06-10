@@ -11,7 +11,10 @@ public class PlayAgainButton : MonoBehaviour
             GameManager.instance.score = 0;
             GameManager.instance.door = null;
             GameManager.instance.isGameFinished = false;
-            Debug.Log("GameManager reset for Play Again");
+        }
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlayBackgroundMusic();
         }
         SceneManager.LoadScene("SampleScene");
     }
