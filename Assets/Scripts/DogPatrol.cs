@@ -25,7 +25,6 @@ public class DogPatrol : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         playerTransform = FindFirstObjectByType<PlayerController2D>().gameObject.transform;
 
-        // Abaikan tabrakan fisik dengan player
         Collider2D playerCollider = playerTransform.GetComponent<Collider2D>();
         if (playerCollider != null)
         {
@@ -47,29 +46,31 @@ public class DogPatrol : MonoBehaviour
 
         if (isChasing)
         {
-            // Cek jika player di luar area persegi panjang atau ada penghalang
+            // ngecek player di luar area persegi panjang atau ada penghalang (box)
             if (deltaX > chaseDistanceX || deltaY > chaseDistanceY)
             {
                 isChasing = false;
             }
             else
             {
-                // Cek penghalang dengan raycast
+                // ngecek penghalang (box) dengan raycast
                 Vector2 direction = (playerTransform.position - transform.position).normalized;
-                RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0), direction, Vector2.Distance(transform.position, playerTransform.position), LayerMask.GetMask("Obstacles"));
-                if (hit.collider != null && hit.collider.CompareTag("Box"))
+                RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0), 
+                direction, Vector2.Distance(transform.position, playerTransform.position), LayerMask.GetMask("Obstacles"));
+                if (hit.collider != null && hit.collider.CompareTag("Box")) // kalo kena box dia berhenti ngejar
                 {
                     isChasing = false;
                 }
                 else
                 {
-                    // Gerakkan anjing menuju player menggunakan Rigidbody2D
-                    if (transform.position.x > playerTransform.position.x)
+                    // gerakkan anjing menuju player
+                    if (transform.position.x > playerTransform.position.x) // kalo posisi x nya lebih besar 
+                    // daripada posisi x si player, anjing ngejar ke kiri
                     {
                         spriteRenderer.flipX = true;
                         rb.linearVelocity = new Vector2(-moveSpeed, rb.linearVelocity.y);
                     }
-                    else if (transform.position.x < playerTransform.position.x)
+                    else if (transform.position.x < playerTransform.position.x) // kebalikannya
                     {
                         spriteRenderer.flipX = false;
                         rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
@@ -77,34 +78,35 @@ public class DogPatrol : MonoBehaviour
                 }
             }
         }
-        else // Mode patrol
+        else // mode patrol
         {
-            // Cek jika player dalam area persegi panjang
+            // ngecek player apakah dalam area anjing
             if (deltaX < chaseDistanceX && deltaY < chaseDistanceY)
             {
                 Vector2 direction = (playerTransform.position - transform.position).normalized;
-                RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0), direction, Vector2.Distance(transform.position, playerTransform.position), LayerMask.GetMask("Obstacles"));
+                RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0), 
+                direction, Vector2.Distance(transform.position, playerTransform.position), LayerMask.GetMask("Obstacles"));
                 if (hit.collider == null || !hit.collider.CompareTag("Box"))
                 {
                     isChasing = true;
                 }
             }
 
-            // Patrol menggunakan MoveTowards
+            // sistem patrol menggunakan MoveTowards
             Vector2 targetPosition = patrolDestination == 0 ? patrolPoints[0].position : patrolPoints[1].position;
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
-            // Atur arah sprite berdasarkan pergerakan menuju titik patrol
+            // mengatur arah sprite berdasarkan pergerakan menuju titik patrol
             if (transform.position.x > targetPosition.x)
             {
-                spriteRenderer.flipX = true; // Menghadap kiri
+                spriteRenderer.flipX = true; // menghadap kiri
             }
             else if (transform.position.x < targetPosition.x)
             {
-                spriteRenderer.flipX = false; // Menghadap kanan
+                spriteRenderer.flipX = false; // menghadap kanan
             }
 
-            // Cek jika sampai di titik patrol
+            // cek jika sampai di titik patrol
             if (patrolDestination == 0)
             {
                 if (Vector2.Distance(transform.position, patrolPoints[0].position) < 0.2f)
@@ -149,7 +151,8 @@ public class DogPatrol : MonoBehaviour
             if (deltaX < chaseDistanceX && deltaY < chaseDistanceY)
             {
                 Vector2 direction = (playerTransform.position - transform.position).normalized;
-                RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0), direction, Vector2.Distance(transform.position, playerTransform.position), LayerMask.GetMask("Obstacles"));
+                RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0), 
+                direction, Vector2.Distance(transform.position, playerTransform.position), LayerMask.GetMask("Obstacles"));
                 if (hit.collider == null || !hit.collider.CompareTag("Box"))
                 {
                     isChasing = true;
