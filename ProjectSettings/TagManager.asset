@@ -69,14 +69,14 @@ TagManager:
   - name: Roof
     uniqueID: 3510713261
     locked: 0
-  - name: Player
-    uniqueID: 4016835455
-    locked: 0
   - name: Obstacle
     uniqueID: 543102727
     locked: 0
   - name: Item
     uniqueID: 327813663
+    locked: 0
+  - name: Player
+    uniqueID: 4016835455
     locked: 0
   - name: balkon
     uniqueID: 1247336215

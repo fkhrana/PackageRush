@@ -33,6 +33,15 @@ public class Timer : MonoBehaviour
             {
                 GameManager.instance.isGameFinished = true;
             }
+            if (AudioManager.instance != null)
+            {
+                AudioManager.instance.PlaySoundEffect("GameOver");
+                AudioManager.instance.StopBackgroundMusic(); 
+            }
+            else
+            {
+                Debug.LogWarning("AudioManager not found!");
+            }
             Debug.Log("Game Over: Time's up!");
             SceneManager.LoadScene("GameOver");
         }
