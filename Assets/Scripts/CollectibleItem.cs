@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CollectibleItem : MonoBehaviour
 {
-    [SerializeField] private int itemIndex;
+    [SerializeField] private ItemData itemData; // Referensi ke Scriptable Object
     private bool isCollected = false;
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -12,10 +12,10 @@ public class CollectibleItem : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isCollected = true;
-            Debug.Log($"Collecting item: {gameObject.name}, index: {itemIndex}");
+            Debug.Log($"Collecting item: {itemData.itemName}, index: {itemData.value}");
             if (GameManager.instance != null)
             {
-                GameManager.instance.CollectItem(itemIndex);
+                GameManager.instance.CollectItem(itemData);
             }
             else
             {

@@ -145,15 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundMusic: {fileID: 3474908906731939318}
   soundEffect: {fileID: 1333167801184775230}
-  dogHit: {fileID: 8300000, guid: b3c9d2db35f4c7040ad6e484557f4f31, type: 3}
-  policeHit: {fileID: 8300000, guid: c2449e4c85f304549a280b3db402d941, type: 3}
-  waterSplash: {fileID: 8300000, guid: 55ffd55248ec2c34889f9ad4828df073, type: 3}
-  starCollect: {fileID: 8300000, guid: cc7cc327d2ba77c478e1b96b3836f1f6, type: 3}
-  bellCollect: {fileID: 8300000, guid: 0356eb2b6903b5c429181c191318f26c, type: 3}
-  phoneCollect: {fileID: 8300000, guid: b8d22a218c099d64cb9e24e796eb728e, type: 3}
-  gameOver: {fileID: 8300000, guid: f3f3fade6099ac042a73eb8691448f1e, type: 3}
-  win: {fileID: 8300000, guid: da5635f2082e59b4bafebdacc24b73f2, type: 3}
-  doorOpen: {fileID: 8300000, guid: 8b8fac43cc64d2d45bdaea8e3973f356, type: 3}
+  audioData: {fileID: 11400000, guid: 442e7839c57c52e41bf22ea2c2becce1, type: 2}
 --- !u!82 &1333167801184775230
 AudioSource:
   m_ObjectHideFlags: 0

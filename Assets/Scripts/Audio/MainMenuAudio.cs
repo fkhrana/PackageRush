@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MainMenuAudio : MonoBehaviour
 {
-    [SerializeField] private GameObject audioManagerPrefab; // Drag prefab di Inspector
+    [SerializeField] private GameObject audioManagerPrefab;
 
     private void Start()
     {
@@ -20,13 +20,12 @@ public class MainMenuAudio : MonoBehaviour
                 return;
             }
         }
-        // Tunggu frame berikutnya biar AudioManager diinisialisasi
         StartCoroutine(PlayBGM());
     }
 
     private System.Collections.IEnumerator PlayBGM()
     {
-        yield return null; // Tunggu frame berikutnya
+        yield return null;
         if (AudioManager.instance != null)
         {
             Debug.Log("Playing BGM in MainMenu");

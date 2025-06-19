@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public bool isGameFinished = false;
     private CollectibleUI collectibleUI;
     private bool[] collectedItems = new bool[3];
+    [SerializeField] private GameObject audioManagerPrefab;
 
     private void Awake()
     {
@@ -18,14 +19,44 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            Debug.Log("GameManager singleton initialized");
         }
         else
         {
+            Debug.LogWarning("Duplicate GameManager instance found, destroying this one");
             Destroy(gameObject);
         }
+
+        EnsureAudioManagerExists();
+    }
+
+    private void Start()
+    {
+        Score scoreComponent = Score.Instance;
+        if (scoreComponent != null)
+        {
+            scoreComponent.OnScoreChanged += UpdateScore;
+            Debug.Log("Subscribed to Score.OnScoreChanged");
+        }
+        else
+        {
+            Debug.LogError("Score component not found when subscribing!");
+        }
+    }
+
+    private void EnsureAudioManagerExists()
+    {
         if (AudioManager.instance == null)
         {
-            Debug.LogError("AudioManager not found! Please add AudioManager to the scene.");
+            Debug.LogWarning("AudioManager not found! Creating from prefab.");
+            if (audioManagerPrefab != null)
+            {
+                Instantiate(audioManagerPrefab);
+            }
+            else
+            {
+                Debug.LogError("AudioManager prefab not assigned in GameManager!");
+            }
         }
     }
 
@@ -49,6 +80,7 @@ public class GameManager : MonoBehaviour
             score = 0;
             isGameFinished = false;
             collectedItems = new bool[3];
+
             door = GameObject.FindWithTag("Door");
             if (door != null)
             {
@@ -72,7 +104,7 @@ public class GameManager : MonoBehaviour
                 Debug.LogWarning("CollectibleUI not found in scene!");
             }
 
-            Score scoreComponent = FindFirstObjectByType<Score>();
+            Score scoreComponent = Score.Instance;
             if (scoreComponent != null)
             {
                 scoreComponent.ResetScore();
@@ -85,49 +117,45 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CollectItem(int itemIndex)
+    private void UpdateScore(int newScore)
     {
-        Debug.Log($"Collect Item called with index: {itemIndex}");
-        if (isGameFinished || itemIndex < 0 || itemIndex >= collectedItems.Length) return;
+        score = newScore;
+        Debug.Log($"GameManager score updated: {score}");
+    }
 
-        if (!collectedItems[itemIndex]) // Hanya collect jika belum dikumpul
+    public void CollectItem(ItemData itemData)
+    {
+        if (isGameFinished || itemData == null || itemData.value < 0 || itemData.value >= collectedItems.Length) return;
+
+        if (!collectedItems[itemData.value])
         {
-            collectedItems[itemIndex] = true;
+            collectedItems[itemData.value] = true;
             itemsCollected++;
-            Debug.Log($"Item collected, total: {itemsCollected}/{requiredItems}");
+            Debug.Log($"Item collected: {itemData.itemName}, total: {itemsCollected}/{requiredItems}");
 
-            // Putar suara
-            if (itemIndex == 0 || itemIndex == 1)
+            if (itemData.soundEffect != null && AudioManager.instance != null)
             {
-                AudioManager.instance.PlaySoundEffect("BellCollect");
-            }
-            else if (itemIndex == 2)
-            {
-                AudioManager.instance.PlaySoundEffect("PhoneCollect");
+                AudioManager.instance.PlaySoundEffect(itemData.soundEffect);
             }
 
             if (collectibleUI != null)
             {
-                collectibleUI.UpdateIcon(itemIndex);
+                collectibleUI.UpdateIcon(itemData.value);
             }
 
             if (itemsCollected >= requiredItems && door != null)
             {
                 Debug.Log("Setting door to open sprite");
                 door.GetComponent<Door>().SetDoorSprite(true);
-                AudioManager.instance.PlaySoundEffect("DoorOpen");
+                if (AudioManager.instance != null)
+                {
+                    AudioManager.instance.PlaySoundEffect("DoorOpen");
+                }
             }
         }
         else
         {
-            Debug.LogWarning($"Item with index {itemIndex} already collected!");
+            Debug.LogWarning($"Item {itemData.itemName} already collected!");
         }
-    }
-
-    public void AddScore(int points)
-    {
-        if (isGameFinished) return;
-        score += points;
-        Debug.Log($"Score updated: {score}");
     }
 }

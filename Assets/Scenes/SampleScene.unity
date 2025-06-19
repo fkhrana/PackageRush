@@ -386,7 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &24477679
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -524,7 +524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &27444840
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2206,7 +2206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &77384462
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2870,7 +2870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &108518124
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3269,7 +3269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &143956922
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4155,6 +4155,7 @@ MonoBehaviour:
   score: 0
   door: {fileID: 1414834124}
   isGameFinished: 0
+  audioManagerPrefab: {fileID: 7653184335676607552, guid: 48c4dc9831cc6f8448ff60f5f58b8cbb, type: 3}
 --- !u!4 &189375704
 Transform:
   m_ObjectHideFlags: 0
@@ -4304,7 +4305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &208821341
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4837,7 +4838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &225527782
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5434,7 +5435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &282142076
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6520,7 +6521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &351778960
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6745,7 +6746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &361843267
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7104,7 +7105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &380324883
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7616,6 +7617,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!1001 &393382104
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 611850346585433182, guid: 8e70931572be9364e849f583201944ab, type: 3}
+      propertyPath: m_Name
+      value: AudioManagerCaller
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876185125681496111, guid: 8e70931572be9364e849f583201944ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 774.0781
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876185125681496111, guid: 8e70931572be9364e849f583201944ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 423.20102
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876185125681496111, guid: 8e70931572be9364e849f583201944ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.473722
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876185125681496111, guid: 8e70931572be9364e849f583201944ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876185125681496111, guid: 8e70931572be9364e849f583201944ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876185125681496111, guid: 8e70931572be9364e849f583201944ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876185125681496111, guid: 8e70931572be9364e849f583201944ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876185125681496111, guid: 8e70931572be9364e849f583201944ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876185125681496111, guid: 8e70931572be9364e849f583201944ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876185125681496111, guid: 8e70931572be9364e849f583201944ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8e70931572be9364e849f583201944ab, type: 3}
 --- !u!1 &401117822
 GameObject:
   m_ObjectHideFlags: 0
@@ -8449,7 +8507,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -8503,6 +8561,10 @@ MonoBehaviour:
   - {fileID: 542047483}
   - {fileID: 1576708957}
   - {fileID: 1351920091}
+  keyItems:
+  - {fileID: 11400000, guid: 5e9c385a5ee318347b65b0d27a5bba24, type: 2}
+  - {fileID: 11400000, guid: 56b1ce4b6acc8c34380910d43799295f, type: 2}
+  - {fileID: 11400000, guid: f2970ea28eaf1004d8f40dae576cf92d, type: 2}
   fadedColor: {r: 0.9402985, g: 0.9402985, b: 0.9402985, a: 0.39215687}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &462494843
@@ -8879,7 +8941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f2e34752bbc184dabc9818cfd95a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemIndex: 1
+  itemData: {fileID: 11400000, guid: 56b1ce4b6acc8c34380910d43799295f, type: 2}
 --- !u!58 &489533183
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10471,7 +10533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &573841241
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -12412,7 +12474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &684262683
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15204,7 +15266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 0}
 --- !u!1 &868074974
 GameObject:
   m_ObjectHideFlags: 0
@@ -16062,7 +16124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &905942904
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17047,7 +17109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &990239556
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -18344,7 +18406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &1120042915
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19021,7 +19083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &1147696877
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -19528,7 +19590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &1160335943
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -21163,7 +21225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &1302714384
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -21696,7 +21758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &1332322332
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -22060,7 +22122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &1355582703
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -22332,7 +22394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &1368072359
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -22470,7 +22532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &1389878408
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -23992,7 +24054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &1462014031
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -25214,7 +25276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f2e34752bbc184dabc9818cfd95a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemIndex: 0
+  itemData: {fileID: 11400000, guid: 5e9c385a5ee318347b65b0d27a5bba24, type: 2}
 --- !u!58 &1527045729
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -27379,7 +27441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &1637082263
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -28220,7 +28282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &1661785839
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -28817,7 +28879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &1678473132
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -29327,7 +29389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &1688909884
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -29671,7 +29733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f2e34752bbc184dabc9818cfd95a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemIndex: 2
+  itemData: {fileID: 11400000, guid: f2970ea28eaf1004d8f40dae576cf92d, type: 2}
 --- !u!58 &1707122675
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -29824,7 +29886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &1710296989
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -31978,7 +32040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &1920429234
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -32432,7 +32494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &1964010546
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -33972,7 +34034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &2016668769
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -34757,7 +34819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &2057612222
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -35290,7 +35352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &2076295798
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -35428,7 +35490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbe21d27cf30354da2154c88cad20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreValue: 1
+  itemData: {fileID: 11400000, guid: 78d98b790da0fc746b2c7d1e37d43e30, type: 2}
 --- !u!58 &2079731113
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -37071,3 +37133,4 @@ SceneRoots:
   - {fileID: 331056457}
   - {fileID: 1414834128}
   - {fileID: 496603470}
+  - {fileID: 393382104}

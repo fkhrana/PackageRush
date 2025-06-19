@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9162a8fdf73f0cb4eab8745b8e9c6d0f, type: 3}
+  m_Name: AudioData
+  m_EditorClassIdentifier: 
+  audioEntries:
+  - effectName: DogHit
+    clip: {fileID: 8300000, guid: b3c9d2db35f4c7040ad6e484557f4f31, type: 3}
+  - effectName: PoliceHit
+    clip: {fileID: 8300000, guid: c2449e4c85f304549a280b3db402d941, type: 3}
+  - effectName: WaterSplash
+    clip: {fileID: 8300000, guid: 55ffd55248ec2c34889f9ad4828df073, type: 3}
+  - effectName: StarCollect
+    clip: {fileID: 8300000, guid: cc7cc327d2ba77c478e1b96b3836f1f6, type: 3}
+  - effectName: BellCollect
+    clip: {fileID: 8300000, guid: 0356eb2b6903b5c429181c191318f26c, type: 3}
+  - effectName: GameOver
+    clip: {fileID: 8300000, guid: f3f3fade6099ac042a73eb8691448f1e, type: 3}
+  - effectName: Win
+    clip: {fileID: 8300000, guid: da5635f2082e59b4bafebdacc24b73f2, type: 3}
+  - effectName: DoorOpen
+    clip: {fileID: 8300000, guid: 8b8fac43cc64d2d45bdaea8e3973f356, type: 3}
+  - effectName: PhoneCollect
+    clip: {fileID: 8300000, guid: b8d22a218c099d64cb9e24e796eb728e, type: 3}
+  backgroundMusicClip: {fileID: 8300000, guid: af2643d3adb2ad94baeef4131691a661, type: 3}
