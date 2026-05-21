@@ -22,6 +22,12 @@ public class enemyPatrol : MonoBehaviour
             Debug.LogError("SpriteRenderer tidak ditemukan pada GameObject ini! Pastikan ada SpriteRenderer.", this);
         }
 
+        if (rb != null)
+        {
+            rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+            rb.freezeRotation = true;
+        }
+
         if (rb == null || sr == null)
         {
             enabled = false;

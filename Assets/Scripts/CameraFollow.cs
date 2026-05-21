@@ -9,6 +9,10 @@ public class CameraFollow : MonoBehaviour
     public Vector3 offset = new Vector3(0, 0, 0);
     [Range(0f, 1f)]
     public float smoothSpeed = 0.125f;
+    public bool useSmoothDamp = true;
+
+    // Internal velocity used by SmoothDamp
+    private Vector3 smoothVelocity = Vector3.zero;
 
     [Header("Position Limits")]
     public float minX = -10f;
@@ -43,8 +47,16 @@ public class CameraFollow : MonoBehaviour
         desiredPosition.x = Mathf.Clamp(desiredPosition.x, minX, maxX);
         desiredPosition.y = Mathf.Clamp(desiredPosition.y, minY, maxY);
 
-        float lerpFactor = Mathf.Clamp01(smoothSpeed * Time.deltaTime * 60f);
-        cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredPosition, lerpFactor);
+        if (useSmoothDamp)
+        {
+            // smoothSpeed here is used as smoothTime (seconds). Small values = snappier follow.
+            cameraTransform.position = Vector3.SmoothDamp(cameraTransform.position, desiredPosition, ref smoothVelocity, Mathf.Max(0.001f, smoothSpeed));
+        }
+        else
+        {
+            float lerpFactor = Mathf.Clamp01(smoothSpeed * Time.deltaTime * 60f);
+            cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredPosition, lerpFactor);
+        }
     }
 
     private void OnDrawGizmos()

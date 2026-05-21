@@ -45,6 +45,10 @@ public class DogPatrol : MonoBehaviour
             return;
         }
 
+        // Improve visual smoothness when camera follows by enabling interpolation
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        rb.freezeRotation = true;
+
         if (patrolPoints == null || patrolPoints.Length < 2 || patrolPoints[0] == null || patrolPoints[1] == null)
         {
             Debug.LogError("DogPatrol needs at least two patrol points.", this);
@@ -67,8 +71,8 @@ public class DogPatrol : MonoBehaviour
             return;
         }
 
-        float deltaX = Mathf.Abs(transform.position.x - playerTransform.position.x);
-        float deltaY = Mathf.Abs(transform.position.y - playerTransform.position.y);
+        float deltaX = Mathf.Abs(rb.position.x - playerTransform.position.x);
+        float deltaY = Mathf.Abs(rb.position.y - playerTransform.position.y);
 
         if (isChasing)
         {
@@ -84,16 +88,12 @@ public class DogPatrol : MonoBehaviour
                 }
                 else
                 {
-                    if (transform.position.x > playerTransform.position.x)
-                    {
-                        spriteRenderer.flipX = true;
-                        rb.linearVelocity = new Vector2(-moveSpeed, rb.linearVelocity.y);
-                    }
-                    else if (transform.position.x < playerTransform.position.x)
-                    {
-                        spriteRenderer.flipX = false;
-                        rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
-                    }
+                    // Move toward player's x position using MovePosition for consistent physics interpolation
+                    float targetX = playerTransform.position.x;
+                    Vector2 targetPos = new Vector2(targetX, rb.position.y);
+                    Vector2 newPos = Vector2.MoveTowards(rb.position, targetPos, moveSpeed * Time.fixedDeltaTime);
+                    spriteRenderer.flipX = newPos.x < rb.position.x;
+                    rb.MovePosition(newPos);
                 }
             }
         }
@@ -146,6 +146,14 @@ public class DogPatrol : MonoBehaviour
 
     #region ground check
     private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Platform"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Platform"))
         {
