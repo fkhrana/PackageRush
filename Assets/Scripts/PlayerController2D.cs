@@ -2,8 +2,15 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerController2D : MonoBehaviour
 {
+    private const string SpeedParameter = "Speed";
+    private const float GroundContactThreshold = 0.5f;
+    private const int DamageAmount = 20;
+    private const string GameOverSceneName = "GameOver";
+
     // Dependencies
     [Header("Dependencies")]
     [SerializeField] private Rigidbody2D rb;
@@ -23,15 +30,41 @@ public class PlayerController2D : MonoBehaviour
     private int currentHealth;
     private bool isGrounded;
     private bool isBlinking = false;
-    public Animator animator;
+    [SerializeField] private Animator animator;
+    private AudioManager audioManager;
+
+    private AudioManager CurrentAudioManager => audioManager != null ? audioManager : AudioManager.instance;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (rb == null)
+        {
+            TryGetComponent(out rb);
+        }
+
+        if (spriteRenderer == null)
+        {
+            TryGetComponent(out spriteRenderer);
+        }
+
+        if (animator == null)
+        {
+            TryGetComponent(out animator);
+        }
+
+        audioManager = AudioManager.instance;
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
-        if (AudioManager.instance == null)
+
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth(maxHealth);
+        }
+        else
+        {
+            Debug.LogWarning("HealthBar is not assigned on PlayerController2D.");
+        }
+
+        if (audioManager == null)
         {
             Debug.LogError("AudioManager not found! Please add AudioManager to the scene.");
         }
@@ -41,13 +74,24 @@ public class PlayerController2D : MonoBehaviour
     {
         if (GameManager.instance != null && GameManager.instance.isGameFinished)
         {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            if (rb != null)
+            {
+                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+            }
+            return;
+        }
+
+        if (rb == null || spriteRenderer == null)
+        {
             return;
         }
 
         float moveX = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
-        animator.SetFloat("Speed", Mathf.Abs(moveX * moveSpeed));
+        if (animator != null)
+        {
+            animator.SetFloat(SpeedParameter, Mathf.Abs(moveX * moveSpeed));
+        }
 
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
         {
@@ -75,7 +119,7 @@ public class PlayerController2D : MonoBehaviour
         {
             foreach (ContactPoint2D contact in other.contacts)
             {
-                if (contact.normal.y > 0.5f)
+                if (contact.normal.y > GroundContactThreshold)
                 {
                     isGrounded = true;
                     break;
@@ -91,36 +135,33 @@ public class PlayerController2D : MonoBehaviour
         if (other.CompareTag("Item"))
         {
             Debug.Log("Player touched score item: " + other.gameObject.name);
-            AudioManager.instance.PlaySoundEffect("StarCollect");
+            CurrentAudioManager?.PlaySoundEffect("StarCollect");
             Destroy(other.gameObject);
         }
         else if (other.CompareTag("WaterObstacle"))
         {
-            if (!isBlinking)
-            {
-                StartCoroutine(BlinkEffect());
-                TakeDamage(20);
-                AudioManager.instance.PlaySoundEffect("WaterSplash");
-            }
+            ApplyDamageIfPossible("WaterSplash");
         }
         else if (other.CompareTag("Police"))
         {
-            if (!isBlinking)
-            {
-                StartCoroutine(BlinkEffect());
-                TakeDamage(20);
-                AudioManager.instance.PlaySoundEffect("PoliceHit");
-            }
+            ApplyDamageIfPossible("PoliceHit");
         }
         else if (other.CompareTag("Dog"))
         {
-            if (!isBlinking)
-            {
-                StartCoroutine(BlinkEffect());
-                TakeDamage(20);
-                AudioManager.instance.PlaySoundEffect("DogHit");
-            }
+            ApplyDamageIfPossible("DogHit");
         }
+    }
+
+    private void ApplyDamageIfPossible(string soundEffect)
+    {
+        if (isBlinking)
+        {
+            return;
+        }
+
+        StartCoroutine(BlinkEffect());
+        TakeDamage(DamageAmount);
+        CurrentAudioManager?.PlaySoundEffect(soundEffect);
     }
 
     private void TakeDamage(int damage)
@@ -128,7 +169,10 @@ public class PlayerController2D : MonoBehaviour
         if (GameManager.instance != null && GameManager.instance.isGameFinished) return;
 
         currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHealth);
+        }
 
         if (currentHealth <= 0)
         {
@@ -137,9 +181,9 @@ public class PlayerController2D : MonoBehaviour
                 GameManager.instance.isGameFinished = true;
             }
             Debug.Log("Game Over: Health depleted!");
-            AudioManager.instance.PlaySoundEffect("GameOver");
-            AudioManager.instance.StopBackgroundMusic();
-            SceneManager.LoadScene("GameOver");
+            CurrentAudioManager?.PlaySoundEffect("GameOver");
+            CurrentAudioManager?.StopBackgroundMusic();
+            SceneManager.LoadScene(GameOverSceneName);
         }
     }
 

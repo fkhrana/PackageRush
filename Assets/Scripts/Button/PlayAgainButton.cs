@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayAgainButton : MonoBehaviour
 {
+    private const string SampleSceneName = "SampleScene";
+
     public void PlayAgain()
     {
         if (GameManager.instance != null)
@@ -16,6 +18,6 @@ public class PlayAgainButton : MonoBehaviour
         {
             AudioManager.instance.PlayBackgroundMusic();
         }
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene(SampleSceneName);
     }
 }

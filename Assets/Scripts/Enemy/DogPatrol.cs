@@ -19,11 +19,38 @@ public class DogPatrol : MonoBehaviour
     private Rigidbody2D rb;
     private Collider2D boxCollider;
 
-    void Start()
+    private const float RaycastYOffset = 0.5f;
+    private const float PatrolReachedDistance = 0.2f;
+
+    private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        boxCollider = GetComponent<BoxCollider2D>();
-        playerTransform = FindFirstObjectByType<PlayerController2D>().gameObject.transform;
+        TryGetComponent(out rb);
+        TryGetComponent(out boxCollider);
+
+        if (spriteRenderer == null)
+        {
+            TryGetComponent(out spriteRenderer);
+        }
+
+        PlayerController2D playerController = FindFirstObjectByType<PlayerController2D>();
+        if (playerController != null)
+        {
+            playerTransform = playerController.transform;
+        }
+
+        if (rb == null || boxCollider == null || spriteRenderer == null || playerTransform == null)
+        {
+            Debug.LogError("DogPatrol is missing required references.", this);
+            enabled = false;
+            return;
+        }
+
+        if (patrolPoints == null || patrolPoints.Length < 2 || patrolPoints[0] == null || patrolPoints[1] == null)
+        {
+            Debug.LogError("DogPatrol needs at least two patrol points.", this);
+            enabled = false;
+            return;
+        }
 
         Collider2D playerCollider = playerTransform.GetComponent<Collider2D>();
         if (playerCollider != null)
@@ -32,7 +59,7 @@ public class DogPatrol : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (!isGrounded)
         {
@@ -40,37 +67,29 @@ public class DogPatrol : MonoBehaviour
             return;
         }
 
-        // Hitung perbedaan koordinat X dan Y
         float deltaX = Mathf.Abs(transform.position.x - playerTransform.position.x);
         float deltaY = Mathf.Abs(transform.position.y - playerTransform.position.y);
 
         if (isChasing)
         {
-            // ngecek player di luar area persegi panjang atau ada penghalang (box)
             if (deltaX > chaseDistanceX || deltaY > chaseDistanceY)
             {
                 isChasing = false;
             }
             else
             {
-                // ngecek penghalang (box) dengan raycast
-                Vector2 direction = (playerTransform.position - transform.position).normalized;
-                RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0), 
-                direction, Vector2.Distance(transform.position, playerTransform.position), LayerMask.GetMask("Obstacles"));
-                if (hit.collider != null && hit.collider.CompareTag("Box")) // kalo kena box dia berhenti ngejar
+                if (HasObstacleBetweenDogAndPlayer())
                 {
                     isChasing = false;
                 }
                 else
                 {
-                    // gerakkan anjing menuju player
-                    if (transform.position.x > playerTransform.position.x) // kalo posisi x nya lebih besar 
-                    // daripada posisi x si player, anjing ngejar ke kiri
+                    if (transform.position.x > playerTransform.position.x)
                     {
                         spriteRenderer.flipX = true;
                         rb.linearVelocity = new Vector2(-moveSpeed, rb.linearVelocity.y);
                     }
-                    else if (transform.position.x < playerTransform.position.x) // kebalikannya
+                    else if (transform.position.x < playerTransform.position.x)
                     {
                         spriteRenderer.flipX = false;
                         rb.linearVelocity = new Vector2(moveSpeed, rb.linearVelocity.y);
@@ -78,45 +97,38 @@ public class DogPatrol : MonoBehaviour
                 }
             }
         }
-        else // mode patrol
+        else
         {
-            // ngecek player apakah dalam area anjing
             if (deltaX < chaseDistanceX && deltaY < chaseDistanceY)
             {
-                Vector2 direction = (playerTransform.position - transform.position).normalized;
-                RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0), 
-                direction, Vector2.Distance(transform.position, playerTransform.position), LayerMask.GetMask("Obstacles"));
-                if (hit.collider == null || !hit.collider.CompareTag("Box"))
+                if (!HasObstacleBetweenDogAndPlayer())
                 {
                     isChasing = true;
                 }
             }
 
-            // sistem patrol menggunakan MoveTowards
             Vector2 targetPosition = patrolDestination == 0 ? patrolPoints[0].position : patrolPoints[1].position;
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
-            // mengatur arah sprite berdasarkan pergerakan menuju titik patrol
             if (transform.position.x > targetPosition.x)
             {
-                spriteRenderer.flipX = true; // menghadap kiri
+                spriteRenderer.flipX = true;
             }
             else if (transform.position.x < targetPosition.x)
             {
-                spriteRenderer.flipX = false; // menghadap kanan
+                spriteRenderer.flipX = false;
             }
 
-            // cek jika sampai di titik patrol
             if (patrolDestination == 0)
             {
-                if (Vector2.Distance(transform.position, patrolPoints[0].position) < 0.2f)
+                if (Vector2.Distance(transform.position, patrolPoints[0].position) < PatrolReachedDistance)
                 {
                     patrolDestination = 1;
                 }
             }
             else if (patrolDestination == 1)
             {
-                if (Vector2.Distance(transform.position, patrolPoints[1].position) < 0.2f)
+                if (Vector2.Distance(transform.position, patrolPoints[1].position) < PatrolReachedDistance)
                 {
                     patrolDestination = 0;
                 }
@@ -124,8 +136,16 @@ public class DogPatrol : MonoBehaviour
         }
     }
 
+    private bool HasObstacleBetweenDogAndPlayer()
+    {
+        Vector2 direction = (playerTransform.position - transform.position).normalized;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, RaycastYOffset, 0),
+            direction, Vector2.Distance(transform.position, playerTransform.position), LayerMask.GetMask("Obstacles"));
+        return hit.collider != null && hit.collider.CompareTag("Box");
+    }
+
     #region ground check
-    void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Platform"))
         {
@@ -133,16 +153,15 @@ public class DogPatrol : MonoBehaviour
         }
     }
 
-    void OnCollisionExit2D(Collision2D other)
+    private void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Platform"))
         {
             isGrounded = false;
         }
     }
-    #endregion
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -150,10 +169,7 @@ public class DogPatrol : MonoBehaviour
             float deltaY = Mathf.Abs(transform.position.y - playerTransform.position.y);
             if (deltaX < chaseDistanceX && deltaY < chaseDistanceY)
             {
-                Vector2 direction = (playerTransform.position - transform.position).normalized;
-                RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0), 
-                direction, Vector2.Distance(transform.position, playerTransform.position), LayerMask.GetMask("Obstacles"));
-                if (hit.collider == null || !hit.collider.CompareTag("Box"))
+                if (!HasObstacleBetweenDogAndPlayer())
                 {
                     isChasing = true;
                 }
@@ -161,7 +177,7 @@ public class DogPatrol : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -169,7 +185,7 @@ public class DogPatrol : MonoBehaviour
         }
     }
 
-    void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Vector3 topLeft = new Vector3(transform.position.x - chaseDistanceX, transform.position.y + chaseDistanceY, transform.position.z);
@@ -189,4 +205,6 @@ public class DogPatrol : MonoBehaviour
             Gizmos.DrawRay(transform.position + new Vector3(0, 0.5f, 0), direction * Mathf.Max(chaseDistanceX, chaseDistanceY));
         }
     }
+
+    #endregion
 }

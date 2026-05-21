@@ -9,6 +9,8 @@ public class Score : MonoBehaviour
     private int score = 0;
     public event Action<int> OnScoreChanged;
 
+    private const string GameFinishedLogMessage = "AddScore skipped: Game is finished.";
+
     private void Awake()
     {
         if (Instance == null)
@@ -21,6 +23,15 @@ public class Score : MonoBehaviour
         {
             Debug.LogWarning("Duplicate Score instance found, destroying this one");
             Destroy(gameObject);
+            return;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
         }
     }
 
@@ -33,7 +44,7 @@ public class Score : MonoBehaviour
     {
         if (GameManager.instance != null && GameManager.instance.isGameFinished)
         {
-            Debug.Log("AddScore skipped: Game is finished.");
+            Debug.Log(GameFinishedLogMessage);
             return;
         }
         if (itemData == null)
@@ -66,10 +77,9 @@ public class Score : MonoBehaviour
         {
             scoreText.text = score.ToString();
             Debug.Log($"Score text updated to: {score}");
+            return;
         }
-        else
-        {
-            Debug.LogError("Score TextMeshProUGUI is not assigned in Inspector!");
-        }
+
+        Debug.LogError("Score TextMeshProUGUI is not assigned in Inspector!");
     }
 }

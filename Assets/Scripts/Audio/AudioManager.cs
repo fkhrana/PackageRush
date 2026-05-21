@@ -9,12 +9,15 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioData audioData; // Referensi ke Scriptable Object
     private Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
 
+    private const string AudioDataWarning = "AudioData not assigned in AudioManager!";
+
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            audioClips.Clear();
 
             // Inisialisasi AudioSource kalau null
             if (backgroundMusic == null)
@@ -44,12 +47,21 @@ public class AudioManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("AudioData not assigned in AudioManager!");
+                Debug.LogWarning(AudioDataWarning);
             }
         }
         else
         {
             Destroy(gameObject);
+            return;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
         }
     }
 
@@ -60,7 +72,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayBackgroundMusic()
     {
-        if (!backgroundMusic.isPlaying && backgroundMusic.clip != null)
+        if (backgroundMusic != null && !backgroundMusic.isPlaying && backgroundMusic.clip != null)
         {
             backgroundMusic.Play();
         }
@@ -68,11 +80,20 @@ public class AudioManager : MonoBehaviour
 
     public void StopBackgroundMusic()
     {
-        backgroundMusic.Stop();
+        if (backgroundMusic != null)
+        {
+            backgroundMusic.Stop();
+        }
     }
 
     public void PlaySoundEffect(string effectName)
     {
+        if (soundEffect == null)
+        {
+            Debug.LogWarning("Sound effect AudioSource is not assigned!");
+            return;
+        }
+
         if (audioClips.TryGetValue(effectName, out AudioClip clip))
         {
             soundEffect.PlayOneShot(clip);

@@ -6,27 +6,29 @@ public class MovingPlatform : MonoBehaviour
     public float distance = 5f;
     private Vector3 startPosition;
     private bool movingRight = true; 
+    private Transform cachedTransform;
 
-    void Start()
+    private void Start()
     {
-        startPosition = transform.position;
+        cachedTransform = transform;
+        startPosition = cachedTransform.position;
     }
 
-    void Update()
+    private void Update()
     {
         float moveDistance = speed * Time.deltaTime;
         if (movingRight)
         {
-            transform.position += new Vector3(moveDistance, 0, 0);
-            if (transform.position.x >= startPosition.x + distance)
+            cachedTransform.position += new Vector3(moveDistance, 0, 0);
+            if (cachedTransform.position.x >= startPosition.x + distance)
             {
                 movingRight = false;
             }
         }
         else
         {
-            transform.position -= new Vector3(moveDistance, 0, 0);
-            if (transform.position.x <= startPosition.x - distance)
+            cachedTransform.position -= new Vector3(moveDistance, 0, 0);
+            if (cachedTransform.position.x <= startPosition.x - distance)
             {
                 movingRight = true;
             }

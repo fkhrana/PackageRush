@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class enemyPatrol : MonoBehaviour
@@ -9,11 +7,11 @@ public class enemyPatrol : MonoBehaviour
     public float kecepatanGerak;
     public bool berbalik;
 
-    void Start()
+    private void Start()
     {
         berbalik = true;
-        rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
+        TryGetComponent(out rb);
+        TryGetComponent(out sr);
 
         if (rb == null)
         {
@@ -23,32 +21,32 @@ public class enemyPatrol : MonoBehaviour
         {
             Debug.LogError("SpriteRenderer tidak ditemukan pada GameObject ini! Pastikan ada SpriteRenderer.", this);
         }
+
+        if (rb == null || sr == null)
+        {
+            enabled = false;
+        }
     }
 
-    void Update()
+    private void Update()
     {
         if (berbalik)
         {
             rb.linearVelocity = new Vector2(kecepatanGerak, rb.linearVelocity.y);
-
-            {
-                sr.flipX = true;
-            }
+            sr.flipX = true;
         }
         else
         {
             rb.linearVelocity = new Vector2(-kecepatanGerak, rb.linearVelocity.y);
 
-            if (sr != null)
-            {
-                sr.flipX = false;
-            }
+            sr.flipX = false;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Balik")){
+        if (collision.gameObject.CompareTag("Balik"))
+        {
             berbalik = !berbalik;
         }
     }

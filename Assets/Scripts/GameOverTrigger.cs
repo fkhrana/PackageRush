@@ -3,6 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class GameOverTrigger : MonoBehaviour
 {
+    private const string PlayerTag = "Player";
+    private const string GameOverSceneName = "GameOver";
+    private const string GameOverSoundEffect = "GameOver";
+
     private void Awake()
     {
         if (AudioManager.instance == null)
@@ -13,7 +17,7 @@ public class GameOverTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag(PlayerTag))
         {
             GameOver();
         }
@@ -25,8 +29,9 @@ public class GameOverTrigger : MonoBehaviour
         {
             GameManager.instance.isGameFinished = true;
         }
-        AudioManager.instance.PlaySoundEffect("GameOver");
-        AudioManager.instance.StopBackgroundMusic();
-        SceneManager.LoadScene("GameOver");
+        AudioManager audioManager = AudioManager.instance;
+        audioManager?.PlaySoundEffect(GameOverSoundEffect);
+        audioManager?.StopBackgroundMusic();
+        SceneManager.LoadScene(GameOverSceneName);
     }
 }

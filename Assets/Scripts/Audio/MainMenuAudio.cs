@@ -4,23 +4,29 @@ public class MainMenuAudio : MonoBehaviour
 {
     [SerializeField] private GameObject audioManagerPrefab;
 
+    private const string AudioManagerPrefabMissingMessage = "AudioManager prefab not assigned!";
+
     private void Start()
     {
-        Debug.Log("MainMenuAudio Start");
-        if (AudioManager.instance == null)
-        {
-            Debug.Log("Instantiating AudioManager prefab");
-            if (audioManagerPrefab != null)
-            {
-                Instantiate(audioManagerPrefab);
-            }
-            else
-            {
-                Debug.LogError("AudioManager prefab not assigned!");
-                return;
-            }
-        }
+        EnsureAudioManagerExists();
         StartCoroutine(PlayBGM());
+    }
+
+    private void EnsureAudioManagerExists()
+    {
+        if (AudioManager.instance != null)
+        {
+            return;
+        }
+
+        Debug.Log("Instantiating AudioManager prefab");
+        if (audioManagerPrefab != null)
+        {
+            Instantiate(audioManagerPrefab);
+            return;
+        }
+
+        Debug.LogError(AudioManagerPrefabMissingMessage);
     }
 
     private System.Collections.IEnumerator PlayBGM()
@@ -30,10 +36,9 @@ public class MainMenuAudio : MonoBehaviour
         {
             Debug.Log("Playing BGM in MainMenu");
             AudioManager.instance.PlayBackgroundMusic();
+            yield break;
         }
-        else
-        {
-            Debug.LogError("AudioManager still null after instantiation!");
-        }
+
+        Debug.LogError("AudioManager still null after instantiation!");
     }
 }

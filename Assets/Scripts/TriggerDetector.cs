@@ -1,21 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TriggerDetector : MonoBehaviour
 {
-    public DogPatrol dogPatrolScript; // Referensi ke skrip utama
+    [SerializeField] private DogPatrol dogPatrolScript; // Referensi ke skrip utama
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        if (dogPatrolScript == null)
+        {
+            return;
+        }
+
         if (other.CompareTag("Player"))
         {
             dogPatrolScript.isChasing = true;
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
+        if (dogPatrolScript == null)
+        {
+            return;
+        }
+
         if (other.CompareTag("Player"))
         {
             dogPatrolScript.isChasing = false;

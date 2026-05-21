@@ -3,8 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class TutorialController : MonoBehaviour
 {
+    private const string SampleSceneName = "SampleScene";
+
     public void CloseTutorial()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene(SampleSceneName);
     }
 }

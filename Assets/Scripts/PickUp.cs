@@ -5,6 +5,8 @@ public class PickUp : MonoBehaviour
     [SerializeField] private ItemData itemData;
     private bool isCollected = false;
 
+    private const string PlayerTag = "Player";
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log($"Trigger entered by: {collision.tag}");
@@ -13,7 +15,7 @@ public class PickUp : MonoBehaviour
             Debug.Log($"Pickup skipped: isCollected={isCollected}, isGameFinished={GameManager.instance?.isGameFinished}");
             return;
         }
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag(PlayerTag))
         {
             if (itemData == null)
             {
@@ -33,14 +35,10 @@ public class PickUp : MonoBehaviour
                 Debug.LogError("Score component not found in scene!");
             }
 
-            if (GameManager.instance != null && itemData.soundEffect != null)
+            if (itemData.soundEffect != null && AudioManager.instance != null)
             {
                 Debug.Log($"Playing sound effect for {itemData.itemName}");
                 AudioManager.instance.PlaySoundEffect(itemData.soundEffect);
-            }
-            else
-            {
-                Debug.LogError("GameManager or AudioManager instance not found, or sound effect is null!");
             }
 
             gameObject.SetActive(false);

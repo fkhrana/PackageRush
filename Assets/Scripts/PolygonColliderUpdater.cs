@@ -8,46 +8,46 @@ public class PolygonColliderUpdater : MonoBehaviour
     private PolygonCollider2D polyCollider;
     private SpriteRenderer spriteRenderer;
     private Sprite currentSprite;
+    private bool lastFlipX;
+    private readonly List<Vector2> physicsShape = new List<Vector2>();
 
-    void Awake()
+    private void Awake()
     {
         polyCollider = GetComponent<PolygonCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         if (spriteRenderer.sprite == null)
             return;
 
-        if (currentSprite != spriteRenderer.sprite)
+        if (currentSprite != spriteRenderer.sprite || lastFlipX != spriteRenderer.flipX)
         {
             currentSprite = spriteRenderer.sprite;
+            lastFlipX = spriteRenderer.flipX;
             UpdateCollider();
         }
     }
 
-    void UpdateCollider()
+    private void UpdateCollider()
     {
         polyCollider.pathCount = currentSprite.GetPhysicsShapeCount();
 
-        List<Vector2> path = new List<Vector2>();
-
         for (int i = 0; i < polyCollider.pathCount; i++)
         {
-            path.Clear();
-            currentSprite.GetPhysicsShape(i, path);
+            physicsShape.Clear();
+            currentSprite.GetPhysicsShape(i, physicsShape);
 
-            // Kalau sprite-nya di-flip secara horizontal, balik posisi titik collider-nya
             if (spriteRenderer.flipX)
             {
-                for (int j = 0; j < path.Count; j++)
+                for (int j = 0; j < physicsShape.Count; j++)
                 {
-                    path[j] = new Vector2(-path[j].x, path[j].y);
+                    physicsShape[j] = new Vector2(-physicsShape[j].x, physicsShape[j].y);
                 }
             }
 
-            polyCollider.SetPath(i, path.ToArray());
+            polyCollider.SetPath(i, physicsShape.ToArray());
         }
     }
 }

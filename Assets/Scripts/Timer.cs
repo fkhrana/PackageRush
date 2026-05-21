@@ -10,9 +10,15 @@ public class Timer : MonoBehaviour
     [SerializeField] private float remainingTime = 60f;
     private bool isGameOver = false;
 
+    private const string GameOverSceneName = "GameOver";
+    private const string GameOverSoundEffect = "GameOver";
+
     private void Start()
     {
-        timerText.color = Color.white;
+        if (timerText != null)
+        {
+            timerText.color = Color.white;
+        }
         isGameOver = false;
     }
 
@@ -27,7 +33,10 @@ public class Timer : MonoBehaviour
         else if (remainingTime <= 0)
         {
             remainingTime = 0;
-            timerText.color = Color.red;
+            if (timerText != null)
+            {
+                timerText.color = Color.red;
+            }
             isGameOver = true;
             if (GameManager.instance != null)
             {
@@ -35,7 +44,7 @@ public class Timer : MonoBehaviour
             }
             if (AudioManager.instance != null)
             {
-                AudioManager.instance.PlaySoundEffect("GameOver");
+                AudioManager.instance.PlaySoundEffect(GameOverSoundEffect);
                 AudioManager.instance.StopBackgroundMusic(); 
             }
             else
@@ -43,11 +52,14 @@ public class Timer : MonoBehaviour
                 Debug.LogWarning("AudioManager not found!");
             }
             Debug.Log("Game Over: Time's up!");
-            SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene(GameOverSceneName);
         }
 
-        int minutes = Mathf.FloorToInt(remainingTime / 60);
-        int seconds = Mathf.FloorToInt(remainingTime % 60);
-        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        if (timerText != null)
+        {
+            int minutes = Mathf.FloorToInt(remainingTime / 60);
+            int seconds = Mathf.FloorToInt(remainingTime % 60);
+            timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
     }
 }

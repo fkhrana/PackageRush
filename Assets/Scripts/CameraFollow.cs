@@ -36,14 +36,14 @@ public class CameraFollow : MonoBehaviour
     {
         if (player == null) return;
 
+        Transform cameraTransform = transform;
         Vector3 desiredPosition = player.position + offset;
-        desiredPosition.z = transform.position.z;
+        desiredPosition.z = cameraTransform.position.z;
 
         desiredPosition.x = Mathf.Clamp(desiredPosition.x, minX, maxX);
         desiredPosition.y = Mathf.Clamp(desiredPosition.y, minY, maxY);
 
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        transform.position = smoothedPosition;
+        cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredPosition, smoothSpeed);
     }
 
     private void OnDrawGizmos()

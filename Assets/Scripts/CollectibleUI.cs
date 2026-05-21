@@ -10,6 +10,17 @@ public class CollectibleUI : MonoBehaviour
 
     private void Start()
     {
+        InitializeIcons();
+    }
+
+    private void InitializeIcons()
+    {
+        if (itemIcons == null || keyItems == null)
+        {
+            Debug.LogWarning("CollectibleUI is missing itemIcons or keyItems references.");
+            return;
+        }
+
         if (keyItems.Length != itemIcons.Length)
         {
             Debug.LogError($"Mismatch between keyItems ({keyItems.Length}) and itemIcons ({itemIcons.Length})!");
@@ -33,6 +44,12 @@ public class CollectibleUI : MonoBehaviour
 
     public void UpdateIcon(int itemIndex)
     {
+        if (itemIcons == null || keyItems == null)
+        {
+            Debug.LogWarning("CollectibleUI is missing itemIcons or keyItems references.");
+            return;
+        }
+
         if (itemIndex >= 0 && itemIndex < itemIcons.Length && itemIndex < keyItems.Length)
         {
             if (keyItems[itemIndex] != null)
@@ -54,6 +71,12 @@ public class CollectibleUI : MonoBehaviour
 
     public void ResetIcons()
     {
+        if (itemIcons == null || keyItems == null)
+        {
+            Debug.LogWarning("CollectibleUI is missing itemIcons or keyItems references.");
+            return;
+        }
+
         for (int i = 0; i < itemIcons.Length; i++)
         {
             if (i < keyItems.Length && keyItems[i] != null)

@@ -9,8 +9,16 @@ public class HealthBar : MonoBehaviour
     public Image fill;
     private bool isGameOver = false;
 
+    private const string GameOverSceneName = "GameOver";
+
     public void SetMaxHealth(int health)
     {
+        if (slider == null || fill == null || gradient == null)
+        {
+            Debug.LogWarning("HealthBar is missing slider, fill, or gradient references.");
+            return;
+        }
+
         slider.maxValue = health;
         slider.value = health;
         fill.color = gradient.Evaluate(1f);
@@ -19,6 +27,13 @@ public class HealthBar : MonoBehaviour
     public void SetHealth(int health)
     {
         if (isGameOver) return;
+
+        if (slider == null || fill == null || gradient == null)
+        {
+            Debug.LogWarning("HealthBar is missing slider, fill, or gradient references.");
+            return;
+        }
+
         slider.value = health;
         fill.color = gradient.Evaluate(slider.normalizedValue);
 
@@ -30,7 +45,7 @@ public class HealthBar : MonoBehaviour
                 GameManager.instance.isGameFinished = true;
             }
             Debug.Log("Game Over: Health depleted!");
-            SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene(GameOverSceneName);
         }
     }
 }
