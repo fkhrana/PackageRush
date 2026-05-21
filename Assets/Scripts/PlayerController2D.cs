@@ -35,6 +35,12 @@ public class PlayerController2D : MonoBehaviour
     private AudioManager audioManager;
     private float moveInput;
     private bool jumpRequested;
+    [SerializeField] private bool allowExternalInput = true;
+    [SerializeField] private float externalInputTimeout = 0.25f;
+    private float externalMoveInput;
+    private bool hasExternalMoveInput;
+    private bool externalJumpRequested;
+    private float lastExternalInputTime = -999f;
     private readonly HashSet<Collider2D> groundedColliders = new HashSet<Collider2D>();
 
     private AudioManager CurrentAudioManager => audioManager != null ? audioManager : AudioManager.instance;
@@ -86,6 +92,7 @@ public class PlayerController2D : MonoBehaviour
         {
             moveInput = 0f;
             jumpRequested = false;
+            externalJumpRequested = false;
 
             return;
         }
@@ -95,7 +102,9 @@ public class PlayerController2D : MonoBehaviour
             return;
         }
 
-        moveInput = Input.GetAxisRaw("Horizontal");
+        float keyboardMoveInput = Input.GetAxisRaw("Horizontal");
+        bool useExternalMoveInput = allowExternalInput && hasExternalMoveInput && (Time.unscaledTime - lastExternalInputTime) <= externalInputTimeout;
+        moveInput = useExternalMoveInput ? externalMoveInput : keyboardMoveInput;
         if (animator != null)
         {
             animator.SetFloat(SpeedParameter, Mathf.Abs(moveInput * moveSpeed));
@@ -104,6 +113,12 @@ public class PlayerController2D : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             jumpRequested = true;
+        }
+
+        if (externalJumpRequested)
+        {
+            jumpRequested = true;
+            externalJumpRequested = false;
         }
 
         if (moveInput > 0)
@@ -273,5 +288,33 @@ public class PlayerController2D : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(new Vector3(minX, -10, 0), new Vector3(minX, 10, 0));
         Gizmos.DrawLine(new Vector3(maxX, -10, 0), new Vector3(maxX, 10, 0));
+    }
+
+    public void MoveLeft()
+    {
+        RegisterExternalMove(-1f);
+    }
+
+    public void MoveRight()
+    {
+        RegisterExternalMove(1f);
+    }
+
+    public void StopMove()
+    {
+        RegisterExternalMove(0f);
+    }
+
+    public void Jump()
+    {
+        lastExternalInputTime = Time.unscaledTime;
+        externalJumpRequested = true;
+    }
+
+    private void RegisterExternalMove(float moveValue)
+    {
+        lastExternalInputTime = Time.unscaledTime;
+        externalMoveInput = moveValue;
+        hasExternalMoveInput = true;
     }
 }
