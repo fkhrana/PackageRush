@@ -43,7 +43,8 @@ public class CameraFollow : MonoBehaviour
         desiredPosition.x = Mathf.Clamp(desiredPosition.x, minX, maxX);
         desiredPosition.y = Mathf.Clamp(desiredPosition.y, minY, maxY);
 
-        cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredPosition, smoothSpeed);
+        float lerpFactor = Mathf.Clamp01(smoothSpeed * Time.deltaTime * 60f);
+        cameraTransform.position = Vector3.Lerp(cameraTransform.position, desiredPosition, lerpFactor);
     }
 
     private void OnDrawGizmos()

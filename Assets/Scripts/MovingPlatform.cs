@@ -14,9 +14,9 @@ public class MovingPlatform : MonoBehaviour
         startPosition = cachedTransform.position;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        float moveDistance = speed * Time.deltaTime;
+        float moveDistance = speed * Time.fixedDeltaTime;
         if (movingRight)
         {
             cachedTransform.position += new Vector3(moveDistance, 0, 0);

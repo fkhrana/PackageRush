@@ -46,6 +46,12 @@ public class PlayerController2D : MonoBehaviour
             TryGetComponent(out rb);
         }
 
+        if (rb != null)
+        {
+            rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+            rb.freezeRotation = true;
+        }
+
         if (spriteRenderer == null)
         {
             TryGetComponent(out spriteRenderer);
