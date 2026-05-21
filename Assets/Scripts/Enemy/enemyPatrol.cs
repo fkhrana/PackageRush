@@ -28,7 +28,7 @@ public class enemyPatrol : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (berbalik)
         {

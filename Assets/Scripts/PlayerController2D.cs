@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,6 +33,9 @@ public class PlayerController2D : MonoBehaviour
     private bool isBlinking = false;
     [SerializeField] private Animator animator;
     private AudioManager audioManager;
+    private float moveInput;
+    private bool jumpRequested;
+    private readonly HashSet<Collider2D> groundedColliders = new HashSet<Collider2D>();
 
     private AudioManager CurrentAudioManager => audioManager != null ? audioManager : AudioManager.instance;
 
@@ -74,10 +78,9 @@ public class PlayerController2D : MonoBehaviour
     {
         if (GameManager.instance != null && GameManager.instance.isGameFinished)
         {
-            if (rb != null)
-            {
-                rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-            }
+            moveInput = 0f;
+            jumpRequested = false;
+
             return;
         }
 
@@ -86,46 +89,99 @@ public class PlayerController2D : MonoBehaviour
             return;
         }
 
-        float moveX = Input.GetAxisRaw("Horizontal");
-        rb.linearVelocity = new Vector2(moveX * moveSpeed, rb.linearVelocity.y);
+        moveInput = Input.GetAxisRaw("Horizontal");
         if (animator != null)
         {
-            animator.SetFloat(SpeedParameter, Mathf.Abs(moveX * moveSpeed));
+            animator.SetFloat(SpeedParameter, Mathf.Abs(moveInput * moveSpeed));
         }
 
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            jumpRequested = true;
+        }
+
+        if (moveInput > 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else if (moveInput < 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (GameManager.instance != null && GameManager.instance.isGameFinished)
+        {
+            if (rb != null)
+            {
+                rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            }
+
+            return;
+        }
+
+        if (rb == null)
+        {
+            return;
+        }
+
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+
+        if (jumpRequested && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
         }
 
-        if (moveX > 0)
-        {
-            spriteRenderer.flipX = true;
-        }
-        else if (moveX < 0)
-        {
-            spriteRenderer.flipX = false;
-        }
+        jumpRequested = false;
 
         // batas posisi X player
-        float clampedX = Mathf.Clamp(transform.position.x, minX, maxX);
-        transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
+        float clampedX = Mathf.Clamp(rb.position.x, minX, maxX);
+        rb.position = new Vector2(clampedX, rb.position.y);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Platform") || other.gameObject.CompareTag("Box"))
+        UpdateGroundedState(other);
+    }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        UpdateGroundedState(other);
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (IsGroundLike(other.gameObject))
         {
-            foreach (ContactPoint2D contact in other.contacts)
+            groundedColliders.Remove(other.collider);
+            isGrounded = groundedColliders.Count > 0;
+        }
+    }
+
+    private void UpdateGroundedState(Collision2D other)
+    {
+        if (!IsGroundLike(other.gameObject))
+        {
+            return;
+        }
+
+        foreach (ContactPoint2D contact in other.contacts)
+        {
+            if (contact.normal.y > GroundContactThreshold)
             {
-                if (contact.normal.y > GroundContactThreshold)
-                {
-                    isGrounded = true;
-                    break;
-                }
+                groundedColliders.Add(other.collider);
+                isGrounded = true;
+                return;
             }
         }
+    }
+
+    private static bool IsGroundLike(GameObject otherObject)
+    {
+        return otherObject.CompareTag("Ground") || otherObject.CompareTag("Platform") || otherObject.CompareTag("Box");
     }
 
     private void OnTriggerEnter2D(Collider2D other)

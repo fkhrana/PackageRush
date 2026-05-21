@@ -59,7 +59,7 @@ public class DogPatrol : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!isGrounded)
         {
@@ -108,27 +108,27 @@ public class DogPatrol : MonoBehaviour
             }
 
             Vector2 targetPosition = patrolDestination == 0 ? patrolPoints[0].position : patrolPoints[1].position;
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            rb.MovePosition(Vector2.MoveTowards(rb.position, targetPosition, moveSpeed * Time.fixedDeltaTime));
 
-            if (transform.position.x > targetPosition.x)
+            if (rb.position.x > targetPosition.x)
             {
                 spriteRenderer.flipX = true;
             }
-            else if (transform.position.x < targetPosition.x)
+            else if (rb.position.x < targetPosition.x)
             {
                 spriteRenderer.flipX = false;
             }
 
             if (patrolDestination == 0)
             {
-                if (Vector2.Distance(transform.position, patrolPoints[0].position) < PatrolReachedDistance)
+                if (Vector2.Distance(rb.position, patrolPoints[0].position) < PatrolReachedDistance)
                 {
                     patrolDestination = 1;
                 }
             }
             else if (patrolDestination == 1)
             {
-                if (Vector2.Distance(transform.position, patrolPoints[1].position) < PatrolReachedDistance)
+                if (Vector2.Distance(rb.position, patrolPoints[1].position) < PatrolReachedDistance)
                 {
                     patrolDestination = 0;
                 }
