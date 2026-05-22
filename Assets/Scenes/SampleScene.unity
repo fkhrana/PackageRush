@@ -37057,7 +37057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da0c8a9036a2a447b2914f5bef586d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArduinoSerialInput
-  portName: COM3
+  portName: COM9
   baudRate: 9600
   reconnectDelay: 2
   autoConnect: 1
