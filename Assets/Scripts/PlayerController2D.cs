@@ -20,6 +20,7 @@ public class PlayerController2D : MonoBehaviour
 
     // Settings
     [Header("Settings")]
+    [SerializeField] private int playerNumber = 1; // 1 for Player 1 (Arrow keys), 2 for Player 2 (WASD)
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private int maxHealth = 100;
@@ -102,7 +103,25 @@ public class PlayerController2D : MonoBehaviour
             return;
         }
 
-        float keyboardMoveInput = Input.GetAxisRaw("Horizontal");
+        // Get keyboard input based on player number
+        float keyboardMoveInput = 0f;
+        if (playerNumber == 1)
+        {
+            // Player 1: Arrow keys
+            if (Input.GetKey(KeyCode.LeftArrow))
+                keyboardMoveInput = -1f;
+            else if (Input.GetKey(KeyCode.RightArrow))
+                keyboardMoveInput = 1f;
+        }
+        else if (playerNumber == 2)
+        {
+            // Player 2: WASD keys
+            if (Input.GetKey(KeyCode.A))
+                keyboardMoveInput = -1f;
+            else if (Input.GetKey(KeyCode.D))
+                keyboardMoveInput = 1f;
+        }
+
         bool useExternalMoveInput = allowExternalInput && hasExternalMoveInput && (Time.unscaledTime - lastExternalInputTime) <= externalInputTimeout;
         moveInput = useExternalMoveInput ? externalMoveInput : keyboardMoveInput;
         if (animator != null)
@@ -110,7 +129,18 @@ public class PlayerController2D : MonoBehaviour
             animator.SetFloat(SpeedParameter, Mathf.Abs(moveInput * moveSpeed));
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        // Jump input based on player number
+        bool jumpPressed = false;
+        if (playerNumber == 1)
+        {
+            jumpPressed = Input.GetKeyDown(KeyCode.UpArrow);
+        }
+        else if (playerNumber == 2)
+        {
+            jumpPressed = Input.GetKeyDown(KeyCode.W);
+        }
+
+        if (jumpPressed)
         {
             jumpRequested = true;
         }
