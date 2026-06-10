@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class ArduinoSerialInput : MonoBehaviour
 {
+    public static ArduinoSerialInput Instance { get; private set; }
+
     [Header("Serial Settings")]
     [SerializeField] private string portName = "COM3";
     [SerializeField] private int baudRate = 9600;
@@ -13,7 +15,8 @@ public class ArduinoSerialInput : MonoBehaviour
     [SerializeField] private bool autoConnect = true;
 
     [Header("Target")]
-    [SerializeField] private PlayerController2D playerController;
+    [SerializeField] private PlayerController2D player1Controller;
+    [SerializeField] private PlayerController2D player2Controller;
 
     private SerialPort serialPort;
     private Thread readThread;
@@ -22,18 +25,58 @@ public class ArduinoSerialInput : MonoBehaviour
     private volatile bool isRunning;
     private float nextReconnectTime;
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (Instance != this)
+        {
+            Debug.LogWarning("Duplicate ArduinoSerialInput instance found, destroying duplicate.", this);
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
-        if (playerController == null)
+        if (player1Controller == null || player2Controller == null)
         {
-            playerController = FindFirstObjectByType<PlayerController2D>();
+            PlayerController2D[] controllers = FindObjectsByType<PlayerController2D>(FindObjectsSortMode.None);
+            foreach (PlayerController2D controller in controllers)
+            {
+                if (controller == null)
+                {
+                    continue;
+                }
+
+                if (controller.PlayerNumber == 1 && player1Controller == null)
+                {
+                    player1Controller = controller;
+                }
+                else if (controller.PlayerNumber == 2 && player2Controller == null)
+                {
+                    player2Controller = controller;
+                }
+            }
         }
 
-        if (playerController == null)
+        if (player1Controller == null)
         {
-            Debug.LogError("ArduinoSerialInput: PlayerController2D tidak ditemukan.", this);
+            player1Controller = FindFirstObjectByType<PlayerController2D>();
+        }
+
+        if (player1Controller == null)
+        {
+            Debug.LogError("ArduinoSerialInput: PlayerController2D untuk Player 1 tidak ditemukan.", this);
             enabled = false;
             return;
+        }
+
+        if (player2Controller == null)
+        {
+            Debug.LogWarning("ArduinoSerialInput: PlayerController2D untuk Player 2 tidak ditemukan. Hanya Player 1 akan dikontrol oleh Arduino.", this);
         }
 
         if (autoConnect)
@@ -125,31 +168,75 @@ public class ArduinoSerialInput : MonoBehaviour
 
     private void HandleCommand(string command)
     {
-        if (playerController == null)
-        {
-            return;
-        }
-
         switch (command.ToUpperInvariant())
         {
             case "L":
             case "LEFT":
-                playerController.MoveLeft();
+            case "P1LEFT":
+                player1Controller?.MoveLeft();
                 break;
             case "R":
             case "RIGHT":
-                playerController.MoveRight();
+            case "P1RIGHT":
+                player1Controller?.MoveRight();
                 break;
             case "S":
             case "STOP":
-                playerController.StopMove();
+            case "P1STOP":
+                player1Controller?.StopMove();
                 break;
             case "J":
             case "JUMP":
-                playerController.Jump();
+            case "P1JUMP":
+                player1Controller?.Jump();
+                break;
+            case "P2LEFT":
+                player2Controller?.MoveLeft();
+                break;
+            case "P2RIGHT":
+                player2Controller?.MoveRight();
+                break;
+            case "P2STOP":
+                player2Controller?.StopMove();
+                break;
+            case "P2JUMP":
+                player2Controller?.Jump();
                 break;
         }
     }
+
+    public bool SendCommand(string command)
+    {
+        if (string.IsNullOrWhiteSpace(command))
+        {
+            return false;
+        }
+
+        lock (portLock)
+        {
+            if (!IsPortOpen())
+            {
+                return false;
+            }
+
+            try
+            {
+                serialPort.WriteLine(command);
+                Debug.Log($"ArduinoSerialInput send: {command}", this);
+                return true;
+            }
+            catch (Exception exception)
+            {
+                Debug.LogWarning($"ArduinoSerialInput write error: {exception.Message}", this);
+                return false;
+            }
+        }
+    }
+
+    public void SendGameOver() => SendCommand("GAMEOVER");
+    public void SendWin() => SendCommand("WIN");
+    public void SendScore(int score) => SendCommand($"SCORE:{score}");
+    public void SendReset() => SendCommand("RESET");
 
     private bool IsPortOpen()
     {

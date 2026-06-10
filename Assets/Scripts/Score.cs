@@ -60,6 +60,7 @@ public class Score : MonoBehaviour
         score += itemData.value;
         SetScoreToTMP();
         OnScoreChanged?.Invoke(score);
+        ArduinoSerialInput.Instance?.SendScore(score);
         Debug.Log($"Score updated: {score} (+{itemData.value} from {itemData.itemName})");
     }
 
@@ -68,6 +69,7 @@ public class Score : MonoBehaviour
         score = 0;
         SetScoreToTMP();
         OnScoreChanged?.Invoke(score);
+        ArduinoSerialInput.Instance?.SendScore(score);
         Debug.Log("Score reset to 0");
     }
 

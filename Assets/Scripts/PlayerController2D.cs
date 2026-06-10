@@ -21,6 +21,7 @@ public class PlayerController2D : MonoBehaviour
     // Settings
     [Header("Settings")]
     [SerializeField] private int playerNumber = 1; // 1 for Player 1 (Arrow keys), 2 for Player 2 (WASD)
+    public int PlayerNumber => playerNumber;
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private int maxHealth = 100;
@@ -290,6 +291,7 @@ public class PlayerController2D : MonoBehaviour
             Debug.Log("Game Over: Health depleted!");
             CurrentAudioManager?.PlaySoundEffect("GameOver");
             CurrentAudioManager?.StopBackgroundMusic();
+            ArduinoSerialInput.Instance?.SendGameOver();
             SceneManager.LoadScene(GameOverSceneName);
         }
     }

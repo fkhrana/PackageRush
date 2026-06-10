@@ -32,6 +32,7 @@ public class GameOverTrigger : MonoBehaviour
         AudioManager audioManager = AudioManager.instance;
         audioManager?.PlaySoundEffect(GameOverSoundEffect);
         audioManager?.StopBackgroundMusic();
+        ArduinoSerialInput.Instance?.SendGameOver();
         SceneManager.LoadScene(GameOverSceneName);
     }
 }

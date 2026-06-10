@@ -45,6 +45,7 @@ public class HealthBar : MonoBehaviour
                 GameManager.instance.isGameFinished = true;
             }
             Debug.Log("Game Over: Health depleted!");
+            ArduinoSerialInput.Instance?.SendGameOver();
             SceneManager.LoadScene(GameOverSceneName);
         }
     }

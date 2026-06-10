@@ -34,6 +34,7 @@ public class Door : MonoBehaviour
             AudioManager audioManager = AudioManager.instance;
             audioManager?.PlaySoundEffect(WinSoundEffect);
             audioManager?.StopBackgroundMusic();
+            ArduinoSerialInput.Instance?.SendWin();
             Debug.Log("Game Won! Player entered door.");
             SceneManager.LoadScene(WinSceneName);
         }

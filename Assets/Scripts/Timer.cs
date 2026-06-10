@@ -51,6 +51,7 @@ public class Timer : MonoBehaviour
             {
                 Debug.LogWarning("AudioManager not found!");
             }
+            ArduinoSerialInput.Instance?.SendGameOver();
             Debug.Log("Game Over: Time's up!");
             SceneManager.LoadScene(GameOverSceneName);
         }
